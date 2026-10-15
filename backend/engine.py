@@ -1,37 +1,59 @@
+
 from pathlib import Path
+import sqlite3
 
 import pandas as pd
 
-DATA_DIR = Path(__file__).parent / "data"
+DATA_DIR = Path(__file__).resolve().parent / "data"
+DB_PATH = DATA_DIR / "hospital.db"
 
-FILES = [
-    "patients.csv",
-    "appointments.csv",
-    "medical_records.csv",
-    "departments.csv",
-    "lab_requests.csv",
-    "lab_results.csv",
+# Tables used by the current quality analytics engine.
+TABLES = [
+    "patients",
+    "appointments",
+    "medical_records",
+    "departments",
+    "lab_requests",
+    "lab_results",
+    "admissions",
+    "billing",
+    "beds",
 ]
 
+# Relationships used for explicit data-quality checks.
 RELATIONSHIPS = [
     ("appointments", "patient_id", "patients", "id"),
     ("medical_records", "patient_id", "patients", "id"),
     ("lab_requests", "medical_record_id", "medical_records", "id"),
     ("lab_results", "request_id", "lab_requests", "id"),
+    ("admissions", "patient_id", "patients", "id"),
+    ("billing", "patient_id", "patients", "id"),
 ]
 
 
 def load_data():
-    """Load the six CSV datasets into a dictionary of DataFrames."""
+    """Load selected SQLite tables as DataFrames."""
+    if not DB_PATH.exists():
+        raise FileNotFoundError(f"Database not found: {DB_PATH}")
+
     data = {}
 
-    for filename in FILES:
-        path = DATA_DIR / filename
+    with sqlite3.connect(DB_PATH) as connection:
+        existing = {
+            row[0]
+            for row in connection.execute(
+                "SELECT name FROM sqlite_master WHERE type='table'"
+            )
+        }
 
-        if not path.exists():
-            raise FileNotFoundError(f"Missing dataset file: {filename}")
+        for table in TABLES:
+            if table not in existing:
+                raise ValueError(f"Required database table is missing: {table}")
 
-        data[filename.removesuffix(".csv")] = pd.read_csv(path)
+            # Table names come only from the fixed TABLES allowlist.
+            data[table] = pd.read_sql_query(
+                f'SELECT * FROM "{table}"', connection
+            )
 
     return data
 
@@ -47,7 +69,7 @@ def _id_set(series):
 
 
 def validate_data(data):
-    """Report missing cells, duplicate rows, duplicate IDs and invalid statuses."""
+    """Report missing cells, duplicate rows/IDs, and unknown appointment statuses."""
     report = {}
 
     for name, df in data.items():
@@ -87,10 +109,15 @@ def validate_data(data):
 
 
 def validate_relationships(data):
-    """Check missing and unmatched foreign keys."""
+    """Check missing and unmatched foreign keys in selected relationships."""
     report = []
 
+    
     for source_name, source_col, target_name, target_col in RELATIONSHIPS:
+    # Older unit tests may provide only a subset of the tables.
+        if source_name not in data or target_name not in data:
+            continue
+
         source = data[source_name]
         target = data[target_name]
 
@@ -107,8 +134,8 @@ def validate_relationships(data):
         target_ids = _id_set(target[target_col])
         source_values = source[source_col]
         non_null_values = source_values.dropna().astype(str).str.strip()
-        unmatched = int((~non_null_values.isin(target_ids)).sum())
 
+        unmatched = int((~non_null_values.isin(target_ids)).sum())
         missing = int(source_values.isna().sum())
 
         report.append({
@@ -120,7 +147,8 @@ def validate_relationships(data):
             "missing_foreign_keys": missing,
             "unmatched_foreign_keys": unmatched,
             "status": (
-                "passed" if missing == 0 and unmatched == 0
+                "passed"
+                if missing == 0 and unmatched == 0
                 else "review_required"
             ),
         })
@@ -128,14 +156,25 @@ def validate_relationships(data):
     return report
 
 
-
 def calculate_metrics(data):
-    """Calculate descriptive measures and report turnaround data quality."""
+    """Calculate descriptive operational quality measures."""
+    
     appointments = data["appointments"]
     requests = data["lab_requests"]
     results = data["lab_results"]
 
-    # 1. Appointment measures
+# Admission and billing data are optional for smaller test datasets.
+    admissions = data.get(
+        "admissions",
+        pd.DataFrame(columns=["admission_date", "discharge_date"]),
+    )
+    billing = data.get(
+        "billing",
+        pd.DataFrame(columns=["total_amount", "paid_amount"]),
+    )
+
+
+    # Appointment measures
     status = _normalize_status(appointments["status"])
 
     total_appointments = len(appointments)
@@ -152,10 +191,9 @@ def calculate_metrics(data):
         if eligible else 0.0
     )
 
-    # 2. Lab result availability: count each request only once.
+    # Lab result availability: requests with at least one linked result.
     result_ids = _id_set(results["request_id"])
     request_ids = requests["id"].astype(str).str.strip()
-
     linked_count = int(request_ids.isin(result_ids).sum())
     total_requests = len(requests)
 
@@ -164,7 +202,7 @@ def calculate_metrics(data):
         if total_requests else 0.0
     )
 
-    # 3. Turnaround: first valid result per request.
+    # Lab turnaround time. Use the earliest valid result per request.
     request_dates = requests[["id", "request_date"]].copy()
     result_dates = results[["request_id", "performed_date"]].copy()
 
@@ -175,7 +213,6 @@ def calculate_metrics(data):
         result_dates["request_id"].astype("string").str.strip()
     )
 
-    # Do not join missing IDs to one another.
     request_dates = request_dates[
         request_dates["_request_key"].notna()
         & request_dates["_request_key"].ne("")
@@ -216,7 +253,6 @@ def calculate_metrics(data):
         & (pairs["_elapsed_days"] >= 0)
     ]
 
-    # One observation per request: its earliest valid result turnaround.
     first_turnaround = valid_pairs.groupby(
         "_request_key"
     )["_elapsed_days"].min()
@@ -226,12 +262,33 @@ def calculate_metrics(data):
         if not first_turnaround.empty else None
     )
 
-    # 4. Data completeness across all loaded tables.
+    # Admission length of stay; negative or invalid durations are excluded.
+    admission_dates = pd.to_datetime(
+        admissions["admission_date"], errors="coerce"
+    )
+    discharge_dates = pd.to_datetime(
+        admissions["discharge_date"], errors="coerce"
+    )
+    stay_days = (
+        (discharge_dates - admission_dates).dt.total_seconds() / 86400
+    )
+    valid_stays = stay_days[
+        stay_days.notna() & (stay_days >= 0)
+    ]
+
+    # Billing balance; clamp negative balances to zero for this measure.
+    total_billed = pd.to_numeric(
+        billing["total_amount"], errors="coerce"
+    ).fillna(0).sum()
+    total_paid = pd.to_numeric(
+        billing["paid_amount"], errors="coerce"
+    ).fillna(0).sum()
+    outstanding_balance = max(float(total_billed - total_paid), 0.0)
+
     total_cells = sum(df.size for df in data.values())
     missing_cells = sum(
         int(df.isna().sum().sum()) for df in data.values()
     )
-
     completeness = (
         (total_cells - missing_cells) / total_cells * 100
         if total_cells else 0.0
@@ -255,12 +312,23 @@ def calculate_metrics(data):
         "valid_lab_turnaround_requests": int(len(first_turnaround)),
         "invalid_lab_date_pairs": invalid_date_pairs,
         "negative_lab_turnaround_pairs": negative_turnaround_pairs,
+        "median_admission_length_of_stay_days": (
+            round(float(valid_stays.median()), 2)
+            if not valid_stays.empty else None
+        ),
+        "admissions_with_valid_stay": int(len(valid_stays)),
+        "total_billed_amount": round(float(total_billed), 2),
+        "total_paid_amount": round(float(total_paid), 2),
+        "estimated_outstanding_balance": round(
+            outstanding_balance, 2
+        ),
         "data_completeness_percent": round(completeness, 2),
         "total_missing_cells": missing_cells,
     }
 
+
 def build_care_gap_worklist(data):
-    """Return a standardized review worklist for the dashboard."""
+    """Build an evidence-based operational review worklist."""
     appointments = data["appointments"]
     requests = data["lab_requests"]
     results = data["lab_results"]
@@ -268,6 +336,7 @@ def build_care_gap_worklist(data):
 
     gaps = []
 
+    # Flag recorded no-shows for staff review.
     statuses = _normalize_status(appointments["status"])
     no_shows = appointments[statuses == "no_show"]
 
@@ -289,21 +358,26 @@ def build_care_gap_worklist(data):
             "priority": "Review",
         })
 
+    # Flag lab requests without a linked result.
     result_ids = _id_set(results["request_id"])
+    request_ids = requests["id"].astype(str).str.strip()
+
     missing_results = requests[
         requests["id"].notna()
-        & ~requests["id"].astype(str).str.strip().isin(result_ids)
+        & ~request_ids.isin(result_ids)
     ]
 
     patient_by_record = {}
     if {"id", "patient_id"}.issubset(records.columns):
         patient_by_record = dict(
-            zip(records["id"].astype(str).str.strip(),
-                records["patient_id"])
+            zip(
+                records["id"].astype(str).str.strip(),
+                records["patient_id"],
+            )
         )
 
     for _, row in missing_results.iterrows():
-        record_id = str(row["id"])
+        request_id = str(row["id"])
         medical_record_id = (
             str(row["medical_record_id"]).strip()
             if pd.notna(row.get("medical_record_id")) else None
@@ -312,10 +386,10 @@ def build_care_gap_worklist(data):
         patient_id = patient_by_record.get(medical_record_id)
 
         gaps.append({
-            "gap_id": f"lab_result_missing:{record_id}",
+            "gap_id": f"lab_result_missing:{request_id}",
             "rule_id": "LAB_RESULT_NOT_LINKED",
             "gap_type": "Lab result not linked",
-            "record_id": record_id,
+            "record_id": request_id,
             "patient_id": (
                 str(patient_id) if pd.notna(patient_id) else None
             ),
