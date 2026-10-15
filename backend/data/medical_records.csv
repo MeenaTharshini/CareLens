@@ -1,0 +1,251 @@
+id,created_at,diagnosis,doctor_id,patient_id,treatment_plan
+1,2025-11-03 09:17:54,Type 2 diabetes,4,1,Watchful waiting
+2,2024-12-13 11:45:39,Asthma,1,10,Medication and follow-up
+3,2025-09-25 15:59:06,Upper respiratory infection,6,5,Lifestyle changes
+4,2025-03-10 14:11:28,Anxiety,1,2,Referral to specialist
+5,2022-11-27 12:16:53,Hypertension,9,6,Physical therapy
+6,2022-06-09 10:15:16,Asthma,10,68,Watchful waiting
+7,2025-12-04 13:41:11,Migraine,1,24,Physical therapy
+8,2024-05-13 11:47:27,Hypertension,7,58,Physical therapy
+9,2021-10-02 18:50:58,Migraine,1,4,Physical therapy
+10,2025-10-18 14:33:05,Urinary tract infection,2,46,Watchful waiting
+11,2021-11-08 15:27:31,Upper respiratory infection,1,3,Referral to specialist
+12,2022-08-14 09:04:11,Hyperlipidemia,5,52,Further tests
+13,2024-07-12 14:56:48,Lower back pain,6,1,Referral to specialist
+14,2025-12-17 16:17:01,Hypertension,1,52,Referral to specialist
+15,2025-07-14 14:20:44,Osteoarthritis,6,1,Referral to specialist
+16,2021-06-01 08:42:50,Gastroenteritis,6,1,Referral to specialist
+17,2025-04-01 15:15:51,Lower back pain,1,58,Lifestyle changes
+18,2024-12-04 20:41:05,Gastroenteritis,1,17,Referral to specialist
+19,2024-12-06 10:22:52,Anxiety,8,43,Physical therapy
+20,2021-07-03 15:58:59,Gastroenteritis,1,10,Watchful waiting
+21,2025-12-06 16:36:33,Hypertension,4,29,Further tests
+22,2021-07-30 14:09:47,Hyperlipidemia,2,7,Medication and follow-up
+23,2025-06-23 14:05:10,Urinary tract infection,10,76,Medication and follow-up
+24,2024-01-10 10:35:32,Sprained ankle,7,1,Physical therapy
+25,2021-08-04 11:20:46,Gastroenteritis,7,79,Watchful waiting
+26,2025-07-20 10:54:44,Anxiety,7,18,Referral to specialist
+27,2025-11-03 17:04:33,Upper respiratory infection,7,31,Watchful waiting
+28,2021-05-24 11:29:00,Anxiety,1,52,Medication and follow-up
+29,2022-11-16 13:39:34,Upper respiratory infection,2,1,Medication and follow-up
+30,2022-10-14 13:05:08,Sprained ankle,8,57,Lifestyle changes
+31,2022-05-12 05:38:45,Asthma,1,13,Lifestyle changes
+32,2023-09-06 07:34:44,Gastroenteritis,4,12,Watchful waiting
+33,2025-02-11 15:12:33,Hypertension,1,51,Further tests
+34,2021-12-01 13:13:32,Anxiety,1,16,Physical therapy
+35,2023-11-19 16:11:32,Hyperlipidemia,5,13,Further tests
+36,2024-03-28 10:53:04,Upper respiratory infection,10,15,Referral to specialist
+37,2024-09-24 13:08:20,Osteoarthritis,1,45,Physical therapy
+38,2024-09-30 11:11:39,Migraine,5,22,Watchful waiting
+39,2025-07-24 10:03:48,Lower back pain,4,33,Further tests
+40,2022-11-11 17:48:45,Lower back pain,2,26,Physical therapy
+41,2025-10-25 10:02:20,Gastroenteritis,5,8,Physical therapy
+42,2021-07-09 16:38:04,Type 2 diabetes,1,13,Referral to specialist
+43,2024-01-27 17:04:31,Hypertension,5,4,Medication and follow-up
+44,2024-04-07 12:39:06,Asthma,6,39,Physical therapy
+45,2024-02-22 17:10:59,Asthma,3,50,Medication and follow-up
+46,2023-11-01 09:02:35,Osteoarthritis,5,6,Medication and follow-up
+47,2023-06-22 16:33:08,Osteoarthritis,5,28,Lifestyle changes
+48,2024-08-24 07:23:47,Gastroenteritis,7,7,Medication and follow-up
+49,2023-09-13 14:07:40,Sprained ankle,1,71,Referral to specialist
+50,2025-05-16 13:03:05,Osteoarthritis,1,4,Further tests
+51,2022-03-10 10:27:12,Asthma,4,30,Referral to specialist
+52,2024-07-08 17:33:59,Upper respiratory infection,5,38,Physical therapy
+53,2023-11-11 10:02:02,Hyperlipidemia,3,2,Referral to specialist
+54,2025-03-30 14:24:41,Hyperlipidemia,2,2,Watchful waiting
+55,2024-11-20 14:18:14,Osteoarthritis,3,3,Lifestyle changes
+56,2024-06-16 15:58:31,Lower back pain,1,8,Medication and follow-up
+57,2023-12-06 12:36:27,Migraine,1,8,Medication and follow-up
+58,2025-12-11 19:20:14,Hyperlipidemia,10,6,Physical therapy
+59,2022-06-01 21:59:14,Asthma,8,79,Referral to specialist
+60,2023-03-25 14:59:05,Type 2 diabetes,2,9,Medication and follow-up
+61,2024-07-05 13:58:57,Sprained ankle,5,17,Further tests
+62,2025-11-17 16:57:34,Upper respiratory infection,2,1,Physical therapy
+63,2025-09-27 16:56:09,Migraine,7,23,Watchful waiting
+64,2025-04-28 09:19:41,Upper respiratory infection,9,77,Watchful waiting
+65,2024-11-27 15:30:21,Urinary tract infection,7,73,Lifestyle changes
+66,2023-02-28 15:41:24,Osteoarthritis,1,2,Referral to specialist
+67,2023-07-14 09:56:52,Hyperlipidemia,9,11,Physical therapy
+68,2025-08-19 14:21:15,Upper respiratory infection,6,26,Lifestyle changes
+69,2025-07-27 09:56:13,Anxiety,1,21,Referral to specialist
+70,2024-07-11 12:01:29,Hyperlipidemia,6,34,Lifestyle changes
+71,2025-09-11 13:12:37,Urinary tract infection,4,23,Further tests
+72,2022-04-17 15:44:36,Gastroenteritis,8,7,Medication and follow-up
+73,2022-12-28 15:15:19,Anxiety,1,5,Watchful waiting
+74,2025-07-14 10:39:45,Asthma,4,33,Lifestyle changes
+75,2023-10-29 14:24:00,Asthma,4,15,Referral to specialist
+76,2023-11-15 08:59:28,Hypertension,1,68,Medication and follow-up
+77,2025-01-02 11:18:17,Urinary tract infection,3,40,Watchful waiting
+78,2024-10-30 16:42:56,Asthma,1,4,Referral to specialist
+79,2023-05-10 13:32:12,Hypertension,1,14,Further tests
+80,2024-11-23 08:03:55,Type 2 diabetes,10,16,Referral to specialist
+81,2024-05-22 12:57:28,Upper respiratory infection,2,12,Medication and follow-up
+82,2024-11-04 11:36:21,Gastroenteritis,1,26,Medication and follow-up
+83,2023-03-03 08:03:39,Anxiety,4,64,Watchful waiting
+84,2022-03-22 10:35:44,Hyperlipidemia,10,1,Physical therapy
+85,2022-05-04 15:23:59,Hyperlipidemia,1,11,Medication and follow-up
+86,2024-10-16 10:25:07,Anxiety,3,1,Physical therapy
+87,2025-01-13 14:40:03,Osteoarthritis,9,10,Referral to specialist
+88,2025-02-28 13:45:11,Urinary tract infection,6,25,Medication and follow-up
+89,2023-05-05 16:09:18,Gastroenteritis,2,3,Further tests
+90,2025-11-12 11:35:24,Osteoarthritis,1,50,Medication and follow-up
+91,2023-09-14 14:02:35,Gastroenteritis,3,3,Watchful waiting
+92,2024-01-25 13:23:58,Type 2 diabetes,4,11,Physical therapy
+93,2023-04-08 12:16:23,Upper respiratory infection,1,77,Lifestyle changes
+94,2021-08-23 15:28:03,Asthma,8,67,Physical therapy
+95,2023-12-23 10:14:16,Urinary tract infection,2,7,Referral to specialist
+96,2024-11-03 12:06:35,Lower back pain,6,80,Medication and follow-up
+97,2024-07-03 08:20:09,Type 2 diabetes,5,6,Referral to specialist
+98,2025-01-31 13:47:42,Upper respiratory infection,3,1,Medication and follow-up
+99,2025-10-25 16:43:00,Anxiety,1,14,Referral to specialist
+100,2023-11-19 19:11:03,Lower back pain,10,9,Lifestyle changes
+101,2023-11-01 13:37:19,Urinary tract infection,8,3,Lifestyle changes
+102,2023-03-27 11:50:19,Migraine,7,11,Medication and follow-up
+103,2024-07-03 11:43:59,Urinary tract infection,4,6,Further tests
+104,2025-01-14 15:30:45,Type 2 diabetes,3,2,Medication and follow-up
+105,2022-11-29 13:44:15,Migraine,2,16,Referral to specialist
+106,2022-06-25 17:27:46,Urinary tract infection,7,8,Lifestyle changes
+107,2024-10-15 17:00:57,Osteoarthritis,1,32,Lifestyle changes
+108,2025-08-02 13:06:15,Hypertension,1,80,Further tests
+109,2023-08-29 15:01:17,Asthma,1,23,Physical therapy
+110,2024-06-02 18:38:22,Osteoarthritis,2,9,Referral to specialist
+111,2025-02-20 10:07:44,Asthma,10,1,Physical therapy
+112,2022-02-19 16:15:10,Gastroenteritis,10,12,Medication and follow-up
+113,2024-11-28 18:17:09,Migraine,10,74,Further tests
+114,2022-11-27 16:52:47,Asthma,10,26,Lifestyle changes
+115,2024-08-06 16:29:02,Asthma,6,14,Further tests
+116,2023-12-14 11:30:02,Upper respiratory infection,5,2,Watchful waiting
+117,2025-07-14 09:10:15,Asthma,3,7,Watchful waiting
+118,2021-05-11 17:09:59,Gastroenteritis,2,37,Lifestyle changes
+119,2023-02-15 14:31:44,Lower back pain,10,44,Further tests
+120,2025-08-10 08:14:59,Urinary tract infection,7,1,Watchful waiting
+121,2023-06-23 07:08:19,Hyperlipidemia,6,38,Watchful waiting
+122,2022-10-27 12:24:51,Hyperlipidemia,1,8,Referral to specialist
+123,2023-12-16 07:04:06,Asthma,10,2,Watchful waiting
+124,2022-12-10 09:14:49,Osteoarthritis,1,1,Watchful waiting
+125,2025-04-04 16:55:52,Hyperlipidemia,10,66,Watchful waiting
+126,2022-06-13 16:00:03,Upper respiratory infection,3,56,Lifestyle changes
+127,2025-05-18 04:44:21,Type 2 diabetes,5,3,Referral to specialist
+128,2024-06-22 09:26:12,Hyperlipidemia,4,70,Further tests
+129,2025-09-24 13:51:23,Anxiety,2,73,Referral to specialist
+130,2024-12-17 16:43:49,Anxiety,1,6,Lifestyle changes
+131,2023-08-31 09:51:33,Osteoarthritis,1,52,Further tests
+132,2022-07-08 10:40:15,Migraine,7,41,Further tests
+133,2025-09-27 15:10:42,Upper respiratory infection,2,1,Physical therapy
+134,2025-09-16 09:35:13,Osteoarthritis,5,4,Referral to specialist
+135,2025-02-03 19:22:19,Osteoarthritis,1,1,Lifestyle changes
+136,2022-08-12 15:48:13,Migraine,4,21,Further tests
+137,2025-02-04 16:19:48,Hypertension,7,16,Further tests
+138,2023-08-29 21:14:57,Anxiety,5,65,Lifestyle changes
+139,2025-07-22 17:30:42,Gastroenteritis,9,58,Further tests
+140,2022-09-13 11:40:14,Sprained ankle,7,19,Watchful waiting
+141,2022-04-04 13:56:45,Hypertension,4,79,Referral to specialist
+142,2025-05-01 16:39:47,Asthma,2,33,Watchful waiting
+143,2022-06-15 11:36:58,Lower back pain,3,41,Referral to specialist
+144,2021-11-15 17:47:06,Lower back pain,2,54,Medication and follow-up
+145,2025-02-22 17:57:39,Upper respiratory infection,1,9,Physical therapy
+146,2024-08-14 14:01:34,Type 2 diabetes,10,1,Referral to specialist
+147,2024-11-08 11:02:50,Osteoarthritis,1,56,Lifestyle changes
+148,2024-12-27 11:10:58,Lower back pain,1,1,Watchful waiting
+149,2024-04-30 06:42:43,Hypertension,1,1,Watchful waiting
+150,2024-01-28 12:10:04,Hypertension,3,6,Further tests
+151,2025-01-19 15:52:24,Sprained ankle,5,45,Referral to specialist
+152,2025-05-08 15:38:29,Upper respiratory infection,1,60,Watchful waiting
+153,2022-10-14 11:08:48,Type 2 diabetes,1,4,Referral to specialist
+154,2022-05-26 13:16:04,Type 2 diabetes,1,1,Medication and follow-up
+155,2022-08-06 11:33:12,Hyperlipidemia,1,11,Medication and follow-up
+156,2022-03-29 19:56:50,Urinary tract infection,1,34,Further tests
+157,2024-02-12 12:06:01,Upper respiratory infection,6,1,Referral to specialist
+158,2022-03-28 11:06:58,Type 2 diabetes,3,44,Further tests
+159,2024-09-13 11:56:42,Gastroenteritis,5,18,Watchful waiting
+160,2024-08-04 15:30:52,Gastroenteritis,2,17,Lifestyle changes
+161,2024-07-29 12:33:35,Upper respiratory infection,4,18,Lifestyle changes
+162,2025-10-24 11:26:03,Type 2 diabetes,1,6,Watchful waiting
+163,2024-12-13 11:46:53,Upper respiratory infection,10,78,Medication and follow-up
+164,2021-06-15 11:01:00,Sprained ankle,10,1,Further tests
+165,2025-07-18 07:05:23,Migraine,4,39,Referral to specialist
+166,2023-02-20 13:31:51,Gastroenteritis,1,68,Lifestyle changes
+167,2022-12-16 09:53:00,Urinary tract infection,1,45,Referral to specialist
+168,2024-03-20 10:37:17,Lower back pain,3,19,Physical therapy
+169,2023-11-06 02:36:20,Gastroenteritis,2,4,Physical therapy
+170,2022-05-01 12:46:34,Hyperlipidemia,9,13,Medication and follow-up
+171,2024-12-21 13:46:52,Hyperlipidemia,1,8,Physical therapy
+172,2024-05-08 17:43:46,Hypertension,2,77,Further tests
+173,2024-07-03 12:20:38,Anxiety,6,65,Medication and follow-up
+174,2023-03-26 16:55:50,Sprained ankle,1,31,Watchful waiting
+175,2024-09-05 14:58:46,Type 2 diabetes,3,7,Medication and follow-up
+176,2022-03-07 09:12:42,Lower back pain,5,3,Further tests
+177,2021-10-05 14:00:31,Anxiety,1,75,Medication and follow-up
+178,2024-01-19 07:19:49,Sprained ankle,3,35,Watchful waiting
+179,2022-11-01 11:21:48,Upper respiratory infection,9,33,Lifestyle changes
+180,2024-11-14 15:48:46,Asthma,5,10,Referral to specialist
+181,2024-02-19 16:31:44,Sprained ankle,4,13,Watchful waiting
+182,2023-04-21 17:39:08,Asthma,2,10,Lifestyle changes
+183,2021-11-21 12:58:13,Lower back pain,2,1,Lifestyle changes
+184,2023-03-01 08:30:27,Sprained ankle,7,22,Referral to specialist
+185,2024-03-21 10:37:32,Urinary tract infection,1,6,Medication and follow-up
+186,2021-09-23 14:01:42,Migraine,2,25,Further tests
+187,2025-11-05 15:49:49,Type 2 diabetes,4,1,Watchful waiting
+188,2023-01-01 09:57:36,Gastroenteritis,3,25,Further tests
+189,2023-09-23 07:21:48,Lower back pain,9,4,Medication and follow-up
+190,2021-02-14 15:34:20,Hypertension,10,5,Watchful waiting
+191,2024-09-15 13:08:55,Gastroenteritis,9,1,Referral to specialist
+192,2021-12-10 22:59:45,Asthma,6,11,Watchful waiting
+193,2023-11-27 12:09:35,Lower back pain,3,1,Medication and follow-up
+194,2025-10-02 09:13:22,Sprained ankle,2,76,Watchful waiting
+195,2024-09-03 10:57:56,Hypertension,2,26,Physical therapy
+196,2025-09-01 09:31:19,Upper respiratory infection,4,71,Physical therapy
+197,2025-03-30 10:18:21,Lower back pain,2,71,Lifestyle changes
+198,2021-09-25 13:08:21,Sprained ankle,1,16,Watchful waiting
+199,2024-05-07 19:20:40,Urinary tract infection,1,23,Medication and follow-up
+200,2025-11-18 12:02:04,Migraine,1,43,Lifestyle changes
+201,2025-08-16 10:17:58,Osteoarthritis,7,9,Further tests
+202,2025-10-05 14:15:34,Sprained ankle,2,68,Medication and follow-up
+203,2023-10-21 11:34:17,Upper respiratory infection,1,28,Watchful waiting
+204,2025-08-12 18:19:49,Lower back pain,1,26,Physical therapy
+205,2024-02-14 09:21:38,Asthma,6,27,Watchful waiting
+206,2022-02-01 15:55:01,Migraine,1,62,Referral to specialist
+207,2024-12-01 13:11:36,Hypertension,4,20,Medication and follow-up
+208,2022-08-03 11:10:10,Anxiety,7,3,Further tests
+209,2025-02-23 08:33:43,Hypertension,4,16,Medication and follow-up
+210,2023-08-06 09:31:02,Upper respiratory infection,7,3,Lifestyle changes
+211,2022-08-25 11:49:55,Gastroenteritis,3,16,Watchful waiting
+212,2022-01-19 18:11:19,Upper respiratory infection,10,2,Further tests
+213,2021-12-01 16:30:48,Upper respiratory infection,1,65,Referral to specialist
+214,2025-05-11 11:09:59,Asthma,1,47,Physical therapy
+215,2023-04-02 15:46:41,Sprained ankle,1,2,Further tests
+216,2025-02-10 13:17:41,Type 2 diabetes,1,54,Medication and follow-up
+217,2022-06-22 14:02:32,Sprained ankle,1,13,Medication and follow-up
+218,2023-04-02 09:03:52,Hyperlipidemia,3,4,Medication and follow-up
+219,2021-08-06 13:44:02,Asthma,3,33,Further tests
+220,2022-12-22 18:22:57,Gastroenteritis,2,11,Watchful waiting
+221,2024-06-17 11:22:17,Migraine,5,75,Referral to specialist
+222,2025-11-28 09:37:53,Hyperlipidemia,2,48,Referral to specialist
+223,2022-10-10 14:16:24,Hyperlipidemia,1,1,Lifestyle changes
+224,2022-08-08 14:11:06,Migraine,1,1,Lifestyle changes
+225,2025-05-28 14:13:53,Gastroenteritis,9,30,Lifestyle changes
+226,2023-05-22 10:37:31,Upper respiratory infection,6,71,Physical therapy
+227,2024-03-26 09:43:58,Asthma,1,1,Watchful waiting
+228,2025-12-19 06:56:20,Upper respiratory infection,2,62,Lifestyle changes
+229,2023-11-07 14:34:47,Asthma,1,62,Lifestyle changes
+230,2025-10-11 16:29:38,Sprained ankle,5,63,Watchful waiting
+231,2024-09-22 10:00:12,Asthma,1,69,Further tests
+232,2022-02-14 00:19:22,Hypertension,1,10,Further tests
+233,2022-06-06 16:06:00,Anxiety,1,33,Referral to specialist
+234,2021-08-17 08:16:11,Migraine,5,41,Physical therapy
+235,2021-06-08 10:38:09,Hypertension,7,11,Physical therapy
+236,2023-02-20 12:34:15,Osteoarthritis,1,15,Referral to specialist
+237,2021-09-26 13:09:33,Osteoarthritis,1,71,Physical therapy
+238,2025-04-11 09:53:16,Hyperlipidemia,8,33,Medication and follow-up
+239,2022-11-03 18:07:47,Hyperlipidemia,1,52,Referral to specialist
+240,2024-01-06 15:44:19,Hypertension,4,8,Watchful waiting
+241,2025-08-21 05:21:19,Anxiety,6,27,Watchful waiting
+242,2022-12-04 13:51:06,Osteoarthritis,1,18,Physical therapy
+243,2024-10-08 09:25:51,Asthma,4,7,Lifestyle changes
+244,2024-11-07 16:19:52,Migraine,2,5,Referral to specialist
+245,2021-05-03 12:01:44,Gastroenteritis,1,6,Lifestyle changes
+246,2023-05-10 15:33:08,Migraine,1,1,Referral to specialist
+247,2024-04-03 15:33:22,Osteoarthritis,7,4,Lifestyle changes
+248,2021-02-22 15:09:44,Hypertension,3,50,Watchful waiting
+249,2025-07-28 14:31:16,Urinary tract infection,4,56,Physical therapy
+250,2025-10-31 12:18:10,Gastroenteritis,1,50,Referral to specialist

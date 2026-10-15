@@ -1,0 +1,1001 @@
+id,appointment_date,doctor_id,notes,patient_id,status
+1,2024-09-10 11:11:21,1,Follow-up in four weeks,29,completed
+2,2021-03-20 15:03:58,3,,2,no_show
+3,2022-05-15 18:17:30,2,,5,completed
+4,2023-12-14 16:54:46,1,Medication adjusted,9,completed
+5,2025-06-06 19:56:43,4,Follow-up in four weeks,7,completed
+6,2023-07-13 09:21:03,6,Tests ordered,2,completed
+7,2024-02-13 15:01:22,3,"Routine check, no concerns",24,completed
+8,2022-11-11 07:27:09,4,Medication adjusted,29,completed
+9,2024-10-04 13:09:16,4,Patient advised to rest,44,completed
+10,2022-05-11 17:06:44,1,Tests ordered,1,completed
+11,2022-05-16 09:21:07,3,,14,completed
+12,2021-05-02 15:12:02,8,,18,completed
+13,2023-09-27 09:36:10,1,,17,completed
+14,2023-09-14 12:11:51,6,Patient advised to rest,14,cancelled
+15,2025-07-14 08:53:40,8,Follow-up in four weeks,80,completed
+16,2025-12-09 10:38:49,2,"Routine check, no concerns",8,completed
+17,2023-06-17 21:22:09,1,,21,cancelled
+18,2025-02-26 11:04:16,3,Patient advised to rest,23,completed
+19,2022-10-24 14:22:23,1,Follow-up in four weeks,35,completed
+20,2025-05-09 12:43:11,1,"Routine check, no concerns",9,cancelled
+21,2025-12-04 17:11:32,1,"Routine check, no concerns",23,cancelled
+22,2024-12-03 16:22:45,3,,25,completed
+23,2022-01-04 11:55:59,3,Medication adjusted,5,completed
+24,2023-01-07 15:56:39,2,Patient advised to rest,18,completed
+25,2024-11-19 10:08:47,1,"Routine check, no concerns",2,cancelled
+26,2023-05-13 09:21:03,10,,61,completed
+27,2024-08-23 10:36:30,2,"Routine check, no concerns",4,cancelled
+28,2025-03-04 16:18:57,5,Tests ordered,69,completed
+29,2021-02-25 09:54:58,2,,1,completed
+30,2023-12-13 13:10:07,1,Medication adjusted,5,completed
+31,2023-06-20 16:26:20,6,,49,completed
+32,2025-01-01 16:18:09,1,Referred to a specialist,6,completed
+33,2021-04-27 14:30:31,7,Tests ordered,71,completed
+34,2023-06-30 14:14:04,1,Follow-up in four weeks,66,completed
+35,2024-06-25 16:44:34,3,,5,completed
+36,2024-09-25 17:13:33,5,Referred to a specialist,29,completed
+37,2024-08-04 14:54:35,6,Medication adjusted,25,no_show
+38,2025-11-04 07:37:33,5,"Routine check, no concerns",1,completed
+39,2021-06-28 16:54:13,1,,59,completed
+40,2021-02-04 13:22:24,5,Follow-up in four weeks,48,completed
+41,2024-02-16 11:20:37,1,Patient advised to rest,1,cancelled
+42,2022-04-11 14:26:41,6,,13,completed
+43,2025-02-20 10:16:10,1,Referred to a specialist,2,completed
+44,2025-11-29 17:49:25,1,,18,completed
+45,2024-03-13 15:42:06,4,Medication adjusted,28,completed
+46,2021-12-25 09:17:53,9,Referred to a specialist,25,completed
+47,2024-03-11 09:27:10,8,Patient advised to rest,71,completed
+48,2023-04-18 10:02:41,1,Patient advised to rest,34,completed
+49,2024-12-23 10:57:09,1,Medication adjusted,19,cancelled
+50,2025-06-26 18:43:55,5,,9,no_show
+51,2023-10-04 12:07:15,8,,11,completed
+52,2022-12-30 14:01:05,8,Referred to a specialist,31,no_show
+53,2023-03-14 11:22:27,10,"Routine check, no concerns",62,completed
+54,2023-03-16 14:03:23,1,,56,completed
+55,2025-03-27 13:15:56,8,,27,completed
+56,2022-08-01 17:10:02,5,,17,completed
+57,2025-01-01 16:41:06,6,Medication adjusted,10,completed
+58,2025-04-20 15:00:21,2,Referred to a specialist,14,completed
+59,2023-12-21 09:12:45,1,,48,completed
+60,2025-02-13 13:20:07,3,Follow-up in four weeks,74,no_show
+61,2022-06-07 20:40:07,7,"Routine check, no concerns",2,completed
+62,2021-06-26 08:26:06,1,Medication adjusted,8,no_show
+63,2025-10-10 08:45:13,1,Medication adjusted,5,no_show
+64,2023-09-14 09:32:10,3,Referred to a specialist,33,completed
+65,2024-06-08 11:25:14,1,,1,completed
+66,2025-12-10 11:55:23,6,Tests ordered,68,completed
+67,2025-05-31 15:59:02,7,,65,completed
+68,2024-12-18 10:38:35,1,Tests ordered,3,completed
+69,2021-09-04 18:44:42,1,,49,completed
+70,2022-05-10 13:55:47,1,,43,completed
+71,2022-04-18 18:00:05,7,"Routine check, no concerns",6,completed
+72,2023-06-08 10:33:12,4,,6,completed
+73,2023-12-21 09:29:23,5,Patient advised to rest,50,completed
+74,2023-08-03 08:37:33,5,Patient advised to rest,77,completed
+75,2024-01-08 10:54:35,7,Medication adjusted,48,completed
+76,2021-01-03 11:57:26,1,Follow-up in four weeks,60,completed
+77,2025-12-31 20:56:25,7,"Routine check, no concerns",14,completed
+78,2022-06-08 17:49:50,2,,20,cancelled
+79,2021-10-24 11:40:27,8,Tests ordered,14,completed
+80,2025-03-27 16:07:16,1,,10,completed
+81,2025-09-26 09:55:21,9,Follow-up in four weeks,64,completed
+82,2023-09-20 18:35:16,1,,20,cancelled
+83,2022-10-21 17:40:05,1,Tests ordered,6,completed
+84,2025-11-03 12:01:55,9,Tests ordered,1,completed
+85,2022-08-07 12:06:43,10,Medication adjusted,75,completed
+86,2023-12-12 10:20:18,8,"Routine check, no concerns",8,completed
+87,2023-11-04 21:38:34,1,Patient advised to rest,1,cancelled
+88,2022-08-10 14:19:58,1,Follow-up in four weeks,44,completed
+89,2025-11-01 16:15:15,4,,1,completed
+90,2025-03-08 09:55:12,5,Patient advised to rest,39,completed
+91,2025-10-31 03:27:42,7,Patient advised to rest,11,cancelled
+92,2024-08-18 10:38:12,2,"Routine check, no concerns",80,completed
+93,2022-09-24 17:35:25,1,"Routine check, no concerns",24,no_show
+94,2025-06-05 11:07:48,2,Referred to a specialist,29,cancelled
+95,2024-06-05 08:07:41,4,"Routine check, no concerns",9,no_show
+96,2021-07-31 11:41:39,6,Tests ordered,1,completed
+97,2021-10-10 15:03:25,3,Referred to a specialist,55,completed
+98,2022-09-29 13:44:55,7,Referred to a specialist,11,completed
+99,2023-07-06 02:54:15,1,,5,completed
+100,2025-07-07 09:36:12,1,,25,completed
+101,2023-02-17 14:11:41,5,,58,completed
+102,2023-12-02 11:23:45,4,Patient advised to rest,3,completed
+103,2023-07-18 06:41:29,1,Follow-up in four weeks,56,completed
+104,2024-12-20 08:29:00,3,,3,completed
+105,2021-07-14 11:06:12,10,,33,completed
+106,2024-07-07 10:29:36,2,,32,completed
+107,2024-11-20 13:32:43,2,Medication adjusted,18,completed
+108,2022-06-11 18:12:50,6,Patient advised to rest,19,completed
+109,2022-09-13 14:02:24,3,,1,completed
+110,2023-02-06 12:40:43,5,Tests ordered,1,completed
+111,2023-09-14 12:08:57,5,Patient advised to rest,1,no_show
+112,2025-05-11 10:44:12,4,Follow-up in four weeks,61,cancelled
+113,2025-02-06 10:06:58,10,"Routine check, no concerns",42,completed
+114,2022-10-31 14:51:14,10,,14,completed
+115,2023-01-12 17:36:49,9,"Routine check, no concerns",11,cancelled
+116,2021-09-14 22:22:30,5,,47,cancelled
+117,2021-12-26 12:13:41,8,,80,completed
+118,2023-08-18 13:25:37,2,Medication adjusted,9,cancelled
+119,2023-05-01 08:13:13,9,Patient advised to rest,31,completed
+120,2025-12-16 13:19:35,1,Referred to a specialist,10,completed
+121,2024-02-26 09:26:47,1,Tests ordered,75,completed
+122,2024-06-22 15:41:07,1,,46,completed
+123,2023-06-26 11:45:51,1,Medication adjusted,79,cancelled
+124,2025-04-17 14:00:52,7,Tests ordered,68,completed
+125,2022-01-16 16:46:40,1,Tests ordered,1,completed
+126,2021-04-13 12:53:48,1,Follow-up in four weeks,16,completed
+127,2023-08-07 16:47:07,4,Tests ordered,26,completed
+128,2021-06-12 18:56:54,1,Medication adjusted,58,completed
+129,2022-08-12 10:18:11,7,Referred to a specialist,71,completed
+130,2024-09-18 11:13:45,5,Medication adjusted,52,completed
+131,2024-08-12 11:54:30,7,"Routine check, no concerns",33,completed
+132,2023-09-28 11:46:37,5,Follow-up in four weeks,18,completed
+133,2024-08-22 13:07:44,1,Follow-up in four weeks,1,completed
+134,2023-01-26 13:31:54,8,,10,completed
+135,2022-11-19 10:33:23,4,Follow-up in four weeks,23,completed
+136,2024-08-25 18:21:06,2,Patient advised to rest,11,completed
+137,2022-01-25 13:34:28,2,Tests ordered,2,completed
+138,2022-07-05 02:55:33,4,Medication adjusted,3,completed
+139,2025-01-21 13:58:00,1,Tests ordered,78,completed
+140,2023-11-07 15:28:47,3,,3,completed
+141,2024-06-18 17:22:33,6,Patient advised to rest,66,completed
+142,2025-09-06 14:31:15,2,,2,completed
+143,2025-05-21 14:02:43,2,,2,completed
+144,2023-07-07 11:27:57,1,Referred to a specialist,73,completed
+145,2023-06-06 14:10:55,2,Medication adjusted,29,cancelled
+146,2024-09-30 17:05:42,3,Referred to a specialist,44,completed
+147,2024-10-11 13:49:36,3,,24,completed
+148,2025-05-29 12:45:43,2,"Routine check, no concerns",1,completed
+149,2022-02-18 09:16:51,1,"Routine check, no concerns",55,completed
+150,2025-02-02 14:41:41,2,,39,completed
+151,2022-03-11 13:13:18,6,Referred to a specialist,4,completed
+152,2023-08-30 06:21:01,9,Patient advised to rest,4,completed
+153,2023-03-05 17:03:01,6,Referred to a specialist,10,cancelled
+154,2022-02-23 13:27:03,7,"Routine check, no concerns",14,completed
+155,2024-03-03 10:20:40,9,Patient advised to rest,34,completed
+156,2023-07-08 08:03:15,6,Follow-up in four weeks,30,completed
+157,2025-07-06 10:19:59,9,Medication adjusted,3,completed
+158,2025-03-21 10:47:31,4,"Routine check, no concerns",31,completed
+159,2025-05-19 10:09:56,9,,1,cancelled
+160,2021-09-07 10:10:23,9,Follow-up in four weeks,9,completed
+161,2021-11-11 10:26:08,8,Referred to a specialist,21,no_show
+162,2022-09-19 16:15:18,1,Medication adjusted,2,completed
+163,2025-08-31 14:14:17,8,Patient advised to rest,73,completed
+164,2025-12-11 16:25:51,1,,19,completed
+165,2023-06-22 16:22:55,2,Medication adjusted,29,completed
+166,2022-01-27 10:15:01,5,Tests ordered,35,completed
+167,2025-12-12 10:52:18,10,,19,cancelled
+168,2024-12-06 10:19:35,5,"Routine check, no concerns",4,completed
+169,2025-06-19 17:59:44,1,Referred to a specialist,67,cancelled
+170,2022-11-21 13:21:50,10,Patient advised to rest,79,cancelled
+171,2021-10-27 14:29:52,3,Medication adjusted,2,completed
+172,2024-01-11 13:14:14,2,Tests ordered,19,cancelled
+173,2025-06-24 21:06:46,1,Medication adjusted,17,completed
+174,2021-01-27 09:54:05,2,Follow-up in four weeks,6,completed
+175,2022-08-17 06:51:38,7,,1,completed
+176,2025-01-08 11:10:30,1,"Routine check, no concerns",61,completed
+177,2023-08-31 13:37:39,2,Follow-up in four weeks,75,cancelled
+178,2021-12-19 09:27:31,2,Referred to a specialist,59,completed
+179,2023-01-04 16:44:06,4,"Routine check, no concerns",1,completed
+180,2022-02-14 10:27:54,1,Medication adjusted,1,completed
+181,2022-11-24 15:53:18,5,,28,no_show
+182,2024-02-25 16:52:48,1,Referred to a specialist,31,completed
+183,2025-04-29 18:39:22,5,"Routine check, no concerns",64,cancelled
+184,2022-12-02 11:41:52,5,Referred to a specialist,56,completed
+185,2023-08-14 15:43:59,1,Tests ordered,6,no_show
+186,2024-04-25 10:29:07,9,Tests ordered,35,completed
+187,2025-11-11 17:05:09,7,Referred to a specialist,11,completed
+188,2021-11-29 07:03:48,1,Follow-up in four weeks,1,completed
+189,2023-10-02 15:28:45,2,"Routine check, no concerns",55,completed
+190,2025-11-04 15:25:17,2,Patient advised to rest,15,completed
+191,2024-06-17 08:54:46,10,Patient advised to rest,50,completed
+192,2024-11-10 08:50:26,1,,58,completed
+193,2022-04-21 17:27:57,4,"Routine check, no concerns",3,completed
+194,2022-07-10 11:01:35,2,Follow-up in four weeks,20,completed
+195,2024-02-24 09:39:43,1,Follow-up in four weeks,47,completed
+196,2022-09-06 11:30:16,1,,1,completed
+197,2023-01-11 14:20:01,9,Patient advised to rest,25,completed
+198,2023-05-26 08:27:55,10,,8,completed
+199,2023-10-09 13:06:15,2,Patient advised to rest,5,completed
+200,2021-11-06 09:14:44,1,,50,completed
+201,2022-12-02 19:45:40,1,Follow-up in four weeks,8,completed
+202,2025-04-30 14:07:47,1,,5,completed
+203,2023-05-31 17:55:19,5,Medication adjusted,8,completed
+204,2025-10-19 15:42:33,10,Referred to a specialist,64,completed
+205,2025-07-31 08:28:50,1,Tests ordered,9,completed
+206,2022-11-08 07:26:27,1,Follow-up in four weeks,2,completed
+207,2024-01-20 12:16:42,7,,18,completed
+208,2025-01-11 13:00:09,8,Tests ordered,20,no_show
+209,2021-04-26 14:16:10,7,,34,completed
+210,2025-02-02 08:42:29,3,Medication adjusted,45,completed
+211,2024-01-11 16:32:46,1,Referred to a specialist,16,completed
+212,2022-01-22 11:29:28,2,,35,completed
+213,2024-07-10 17:52:00,1,,35,completed
+214,2022-04-17 14:12:39,1,,33,completed
+215,2021-01-02 10:24:14,1,Tests ordered,11,completed
+216,2024-07-15 11:39:59,10,Tests ordered,6,cancelled
+217,2021-08-14 18:20:27,10,Tests ordered,5,completed
+218,2024-05-18 17:32:09,1,Referred to a specialist,1,completed
+219,2021-08-16 13:54:57,9,Patient advised to rest,1,completed
+220,2023-07-19 16:19:24,3,,2,completed
+221,2025-07-05 08:02:41,8,Referred to a specialist,1,completed
+222,2024-05-19 14:38:04,1,"Routine check, no concerns",13,completed
+223,2025-08-17 11:49:50,1,,8,completed
+224,2022-03-07 11:35:54,1,Follow-up in four weeks,4,completed
+225,2023-12-10 13:27:06,4,,34,completed
+226,2025-07-27 18:58:24,1,Patient advised to rest,3,completed
+227,2022-09-30 09:16:06,1,"Routine check, no concerns",7,completed
+228,2022-12-14 11:53:20,4,Referred to a specialist,35,completed
+229,2024-05-13 14:17:31,3,Referred to a specialist,17,completed
+230,2024-03-10 11:03:26,4,Medication adjusted,1,completed
+231,2022-03-31 17:20:48,5,,18,completed
+232,2025-09-07 11:03:28,7,"Routine check, no concerns",14,completed
+233,2025-06-07 09:26:37,8,"Routine check, no concerns",11,completed
+234,2023-11-16 18:11:12,1,Medication adjusted,12,completed
+235,2024-11-30 11:20:33,4,"Routine check, no concerns",75,completed
+236,2023-12-10 15:30:52,7,,6,completed
+237,2021-12-19 15:09:22,1,Patient advised to rest,8,completed
+238,2022-09-01 13:29:26,6,Follow-up in four weeks,5,completed
+239,2021-03-29 20:27:35,3,"Routine check, no concerns",24,completed
+240,2022-11-20 10:49:26,10,Medication adjusted,1,completed
+241,2025-08-15 09:29:45,8,,29,completed
+242,2023-01-05 12:26:54,1,,1,no_show
+243,2024-12-11 11:37:53,6,,2,completed
+244,2024-11-17 15:49:59,2,Referred to a specialist,13,completed
+245,2022-10-18 09:39:59,10,"Routine check, no concerns",25,completed
+246,2024-04-02 08:49:47,8,Referred to a specialist,29,completed
+247,2024-12-22 15:52:31,7,Patient advised to rest,8,completed
+248,2025-07-25 13:28:05,9,,1,cancelled
+249,2024-04-24 17:12:51,1,Patient advised to rest,66,completed
+250,2022-09-07 15:52:47,4,Patient advised to rest,43,completed
+251,2024-04-01 09:42:55,1,Follow-up in four weeks,1,completed
+252,2024-07-24 21:09:59,3,Follow-up in four weeks,48,completed
+253,2022-01-27 10:58:54,10,"Routine check, no concerns",31,completed
+254,2024-11-15 08:05:33,9,"Routine check, no concerns",73,completed
+255,2025-10-07 16:56:15,4,Follow-up in four weeks,69,no_show
+256,2022-12-29 16:51:21,1,,30,completed
+257,2025-05-17 14:18:42,3,,4,completed
+258,2022-11-14 12:19:03,1,,31,completed
+259,2025-08-23 14:23:01,7,,1,completed
+260,2024-05-09 01:04:01,4,Follow-up in four weeks,14,completed
+261,2025-04-22 17:55:47,1,Tests ordered,53,completed
+262,2023-02-02 10:13:55,1,Patient advised to rest,58,completed
+263,2024-05-01 10:52:29,10,"Routine check, no concerns",48,completed
+264,2025-03-17 08:31:00,1,Referred to a specialist,4,completed
+265,2022-01-16 17:48:23,7,"Routine check, no concerns",27,completed
+266,2021-05-02 09:03:55,1,Referred to a specialist,3,completed
+267,2025-06-26 17:09:52,2,,7,completed
+268,2025-08-31 15:33:08,4,,75,completed
+269,2025-01-05 11:28:25,8,"Routine check, no concerns",8,completed
+270,2023-06-19 09:32:04,6,Medication adjusted,1,completed
+271,2023-12-07 14:56:28,1,"Routine check, no concerns",19,completed
+272,2025-11-14 09:30:41,2,Follow-up in four weeks,11,completed
+273,2024-04-15 16:13:18,7,,31,completed
+274,2022-06-01 13:30:24,2,Medication adjusted,30,completed
+275,2024-02-22 13:18:51,4,,14,completed
+276,2024-10-21 19:18:32,1,Referred to a specialist,23,completed
+277,2024-12-02 16:55:46,6,Patient advised to rest,14,cancelled
+278,2024-08-18 19:04:13,8,,48,completed
+279,2023-11-08 13:17:44,1,Tests ordered,21,completed
+280,2024-12-22 16:22:34,3,Tests ordered,10,completed
+281,2023-06-21 00:30:19,2,Follow-up in four weeks,1,completed
+282,2025-05-06 10:36:26,1,Follow-up in four weeks,69,completed
+283,2023-01-20 13:12:21,2,Referred to a specialist,1,cancelled
+284,2021-12-29 19:32:00,2,,34,cancelled
+285,2025-08-23 15:29:44,9,Tests ordered,1,completed
+286,2023-07-12 13:32:40,5,Referred to a specialist,25,no_show
+287,2024-07-31 16:24:42,1,,8,completed
+288,2021-06-25 16:18:11,2,,73,cancelled
+289,2025-12-19 12:12:51,1,Referred to a specialist,29,completed
+290,2025-02-02 10:52:13,6,,2,completed
+291,2023-03-17 09:44:19,2,,63,cancelled
+292,2022-06-22 11:15:59,1,,1,completed
+293,2022-12-10 07:07:55,5,,9,completed
+294,2023-06-26 18:34:05,9,,47,completed
+295,2022-12-12 21:42:39,1,Follow-up in four weeks,8,completed
+296,2023-07-23 10:27:43,6,Follow-up in four weeks,5,completed
+297,2023-07-11 10:01:27,8,Medication adjusted,18,completed
+298,2025-12-17 14:01:04,1,Referred to a specialist,10,completed
+299,2023-09-18 13:12:49,1,Tests ordered,22,completed
+300,2025-06-11 15:18:23,1,Tests ordered,58,completed
+301,2025-03-09 20:17:54,4,Patient advised to rest,67,completed
+302,2025-12-07 17:23:58,8,Follow-up in four weeks,19,completed
+303,2023-11-30 17:38:15,1,Referred to a specialist,4,completed
+304,2022-07-16 16:24:14,6,Medication adjusted,41,completed
+305,2023-08-26 15:56:58,3,Patient advised to rest,7,completed
+306,2023-10-26 11:23:19,1,Follow-up in four weeks,11,completed
+307,2022-05-08 19:57:15,1,"Routine check, no concerns",54,completed
+308,2021-05-02 14:08:52,2,Tests ordered,1,completed
+309,2024-08-06 17:42:41,8,Medication adjusted,54,completed
+310,2022-11-02 16:08:29,1,Medication adjusted,48,completed
+311,2023-03-17 16:29:23,9,"Routine check, no concerns",21,completed
+312,2023-09-06 06:41:05,2,"Routine check, no concerns",71,completed
+313,2024-05-01 15:49:52,7,Follow-up in four weeks,50,completed
+314,2024-09-12 12:22:12,1,,2,completed
+315,2022-09-24 16:52:10,5,Referred to a specialist,50,completed
+316,2023-04-01 14:48:07,2,Patient advised to rest,41,completed
+317,2025-04-01 08:49:21,1,,49,completed
+318,2024-03-27 15:58:31,1,,10,no_show
+319,2024-07-01 10:06:36,6,Patient advised to rest,3,no_show
+320,2021-08-22 13:03:35,1,Follow-up in four weeks,9,completed
+321,2025-02-11 15:57:34,3,Follow-up in four weeks,2,completed
+322,2024-07-15 14:36:15,1,Medication adjusted,9,completed
+323,2024-07-14 18:23:39,4,Medication adjusted,46,completed
+324,2025-01-10 11:20:34,2,,20,completed
+325,2025-08-26 07:46:53,1,Tests ordered,56,completed
+326,2024-04-07 10:40:57,7,Tests ordered,14,cancelled
+327,2025-07-22 17:59:26,2,Patient advised to rest,4,completed
+328,2021-03-29 17:00:31,6,Medication adjusted,1,completed
+329,2024-03-20 09:21:15,9,Referred to a specialist,57,completed
+330,2025-12-03 09:49:58,2,,1,cancelled
+331,2025-06-30 16:44:38,2,"Routine check, no concerns",20,completed
+332,2025-02-27 16:55:48,2,Referred to a specialist,9,completed
+333,2021-03-29 18:09:45,1,"Routine check, no concerns",47,completed
+334,2025-12-16 12:39:48,1,Patient advised to rest,43,completed
+335,2022-05-04 14:38:23,2,,4,completed
+336,2025-01-20 16:16:41,1,Medication adjusted,55,no_show
+337,2022-12-29 16:45:13,3,,1,completed
+338,2023-06-09 10:17:08,2,Tests ordered,1,completed
+339,2021-09-29 13:49:39,1,Medication adjusted,53,completed
+340,2024-09-08 10:15:51,1,Follow-up in four weeks,70,completed
+341,2023-04-07 10:20:14,1,Tests ordered,51,completed
+342,2023-05-15 18:52:26,1,Medication adjusted,33,completed
+343,2021-11-25 13:42:41,2,Follow-up in four weeks,25,completed
+344,2025-09-13 08:39:15,2,Medication adjusted,30,completed
+345,2023-06-16 09:02:38,1,,55,completed
+346,2025-08-09 14:30:53,1,,34,cancelled
+347,2022-07-15 13:43:40,3,Tests ordered,25,completed
+348,2022-08-20 04:53:39,3,Tests ordered,31,completed
+349,2024-12-29 12:41:34,1,,7,completed
+350,2022-03-16 16:49:02,3,Medication adjusted,16,cancelled
+351,2023-08-04 14:09:34,1,"Routine check, no concerns",77,completed
+352,2025-05-26 07:40:02,8,Follow-up in four weeks,22,completed
+353,2025-10-12 11:30:20,1,Patient advised to rest,35,completed
+354,2025-12-12 10:41:25,10,Tests ordered,30,completed
+355,2025-11-24 11:52:18,2,Patient advised to rest,13,completed
+356,2025-10-04 16:56:18,2,Patient advised to rest,39,cancelled
+357,2024-12-09 18:36:56,1,"Routine check, no concerns",6,completed
+358,2022-09-19 17:43:07,4,,37,completed
+359,2024-07-15 17:45:01,2,Patient advised to rest,42,completed
+360,2023-05-22 11:51:53,2,"Routine check, no concerns",24,completed
+361,2022-11-06 16:09:45,1,,36,completed
+362,2025-03-04 12:21:46,3,Medication adjusted,10,completed
+363,2022-03-13 20:27:19,1,Tests ordered,67,completed
+364,2022-04-26 17:12:02,9,Tests ordered,24,completed
+365,2024-06-02 09:35:05,9,Tests ordered,30,completed
+366,2024-12-09 14:52:06,1,Referred to a specialist,33,completed
+367,2023-04-06 07:51:37,4,Referred to a specialist,13,completed
+368,2022-03-22 09:49:08,3,"Routine check, no concerns",8,completed
+369,2024-06-07 14:10:45,4,Medication adjusted,31,completed
+370,2025-07-05 10:00:55,9,Medication adjusted,1,completed
+371,2022-05-24 10:43:44,1,"Routine check, no concerns",2,completed
+372,2024-10-07 14:20:26,5,,1,completed
+373,2024-02-16 17:35:58,2,Tests ordered,74,completed
+374,2025-11-03 09:21:28,4,,65,completed
+375,2025-12-25 15:23:43,2,Tests ordered,60,completed
+376,2023-05-10 19:25:41,7,Tests ordered,2,completed
+377,2024-11-17 14:53:31,1,,37,completed
+378,2021-02-04 06:04:02,4,,70,completed
+379,2025-02-27 11:31:00,1,Patient advised to rest,26,completed
+380,2021-05-01 08:47:37,1,,63,completed
+381,2023-07-24 08:21:13,10,Follow-up in four weeks,25,completed
+382,2025-02-13 06:16:04,5,Tests ordered,1,cancelled
+383,2023-04-02 11:13:25,1,Follow-up in four weeks,1,cancelled
+384,2025-05-05 18:52:04,1,Tests ordered,64,completed
+385,2021-04-29 17:31:24,9,,46,completed
+386,2023-03-13 14:52:50,2,,1,completed
+387,2022-07-27 11:05:25,2,Follow-up in four weeks,14,completed
+388,2023-01-11 14:46:49,5,Follow-up in four weeks,15,completed
+389,2024-01-19 12:13:51,1,Follow-up in four weeks,27,completed
+390,2024-08-26 12:26:27,7,Follow-up in four weeks,38,completed
+391,2021-07-21 15:47:32,5,,49,completed
+392,2024-07-12 09:08:45,1,Tests ordered,77,completed
+393,2024-08-18 12:28:31,3,,12,completed
+394,2025-01-26 10:36:50,10,Follow-up in four weeks,63,completed
+395,2025-10-04 09:44:37,3,,48,completed
+396,2022-01-15 11:30:54,2,,77,completed
+397,2024-08-22 16:24:44,4,,4,completed
+398,2025-07-13 09:48:27,5,Referred to a specialist,4,completed
+399,2024-03-08 11:24:43,2,Follow-up in four weeks,16,completed
+400,2023-08-08 11:43:22,7,"Routine check, no concerns",7,cancelled
+401,2023-08-22 11:08:52,1,"Routine check, no concerns",10,completed
+402,2022-05-27 08:33:20,1,"Routine check, no concerns",1,completed
+403,2021-09-02 08:31:23,7,Patient advised to rest,49,completed
+404,2023-05-10 14:15:01,7,Tests ordered,14,completed
+405,2021-07-12 17:38:08,3,"Routine check, no concerns",1,completed
+406,2023-07-13 12:03:48,1,Patient advised to rest,20,completed
+407,2025-02-12 12:50:41,9,"Routine check, no concerns",42,completed
+408,2025-07-26 15:29:11,2,Patient advised to rest,48,completed
+409,2025-02-25 10:05:34,4,Medication adjusted,71,completed
+410,2022-09-05 13:09:44,1,Medication adjusted,64,completed
+411,2021-12-11 13:17:18,6,,5,completed
+412,2025-10-25 13:41:57,9,,22,completed
+413,2025-02-11 15:13:35,1,Follow-up in four weeks,5,completed
+414,2023-07-04 22:17:49,2,"Routine check, no concerns",1,completed
+415,2021-04-10 08:28:22,3,"Routine check, no concerns",10,cancelled
+416,2024-10-28 06:22:08,8,Tests ordered,13,completed
+417,2022-07-14 13:37:14,8,Patient advised to rest,6,completed
+418,2022-08-18 13:02:40,4,Patient advised to rest,10,completed
+419,2022-09-10 11:15:19,5,"Routine check, no concerns",1,completed
+420,2025-09-15 12:12:11,10,Referred to a specialist,1,completed
+421,2022-07-01 16:39:33,1,Medication adjusted,17,completed
+422,2022-10-22 17:00:26,1,Medication adjusted,40,completed
+423,2023-05-26 15:29:28,1,,26,cancelled
+424,2025-07-24 15:56:27,1,Patient advised to rest,14,completed
+425,2022-08-29 09:49:03,1,Follow-up in four weeks,31,completed
+426,2025-01-11 06:10:59,2,Tests ordered,4,cancelled
+427,2024-11-18 13:46:47,1,,4,completed
+428,2024-07-11 10:23:55,1,Follow-up in four weeks,23,completed
+429,2021-07-17 17:25:54,1,,1,completed
+430,2023-11-04 16:20:24,6,,1,cancelled
+431,2025-11-19 18:27:38,3,,2,completed
+432,2024-05-12 13:47:06,2,Tests ordered,41,completed
+433,2025-03-03 11:52:52,1,Tests ordered,1,completed
+434,2025-05-04 12:53:24,2,Referred to a specialist,19,completed
+435,2025-03-27 12:39:17,5,"Routine check, no concerns",23,completed
+436,2023-09-20 14:36:35,7,Patient advised to rest,37,completed
+437,2024-07-08 15:18:47,10,Patient advised to rest,53,completed
+438,2025-01-17 12:39:48,1,Follow-up in four weeks,55,completed
+439,2025-04-25 15:44:29,1,"Routine check, no concerns",76,completed
+440,2025-10-11 09:35:25,1,Follow-up in four weeks,3,completed
+441,2022-07-18 13:17:01,7,,1,cancelled
+442,2025-12-28 14:39:08,3,Referred to a specialist,21,completed
+443,2023-03-21 12:38:01,3,"Routine check, no concerns",2,completed
+444,2023-05-21 11:04:23,10,Tests ordered,5,completed
+445,2022-12-09 08:03:35,2,,24,completed
+446,2022-11-30 12:22:21,1,,78,completed
+447,2021-07-29 14:06:33,1,,4,completed
+448,2025-08-13 15:01:29,2,Referred to a specialist,3,completed
+449,2023-09-30 11:11:24,8,,1,completed
+450,2023-05-02 11:11:55,1,Patient advised to rest,9,completed
+451,2023-09-16 14:16:33,1,,3,completed
+452,2022-04-24 12:02:08,1,Medication adjusted,67,completed
+453,2025-08-28 09:48:35,9,,53,completed
+454,2021-02-21 14:31:14,1,Medication adjusted,68,completed
+455,2025-10-23 14:08:29,7,,52,completed
+456,2025-01-19 14:12:00,5,Patient advised to rest,1,completed
+457,2022-06-11 20:56:47,2,Medication adjusted,9,no_show
+458,2023-03-22 15:22:20,1,Patient advised to rest,20,completed
+459,2024-09-25 12:41:31,1,,13,completed
+460,2024-05-29 19:52:49,6,"Routine check, no concerns",33,completed
+461,2024-08-07 11:10:00,1,"Routine check, no concerns",18,completed
+462,2021-05-29 07:57:10,5,Referred to a specialist,72,completed
+463,2022-07-03 08:28:13,1,,12,completed
+464,2021-02-06 12:48:03,3,,5,completed
+465,2025-05-23 13:49:47,2,Patient advised to rest,16,completed
+466,2021-09-23 10:47:43,4,,2,completed
+467,2024-07-27 06:07:17,2,Follow-up in four weeks,20,completed
+468,2025-07-21 12:18:20,4,Medication adjusted,33,completed
+469,2024-07-12 08:27:24,3,,24,completed
+470,2024-04-27 15:24:16,3,Follow-up in four weeks,10,completed
+471,2024-08-15 10:00:13,6,,14,completed
+472,2024-06-12 04:00:22,8,Referred to a specialist,5,completed
+473,2023-12-07 15:26:26,1,Patient advised to rest,20,completed
+474,2025-01-05 00:39:31,1,Patient advised to rest,15,completed
+475,2023-11-22 14:24:37,1,Tests ordered,24,cancelled
+476,2024-04-23 19:58:40,1,,14,completed
+477,2023-09-30 17:53:07,4,Patient advised to rest,7,completed
+478,2023-10-22 12:26:10,9,Medication adjusted,38,completed
+479,2021-11-21 11:41:57,2,Patient advised to rest,71,completed
+480,2024-07-09 09:59:22,2,,13,completed
+481,2024-03-17 16:27:18,4,Medication adjusted,15,completed
+482,2022-08-06 17:49:06,2,Tests ordered,37,completed
+483,2024-03-07 15:10:19,3,,74,completed
+484,2024-04-15 13:30:13,3,Referred to a specialist,28,cancelled
+485,2023-06-10 14:11:10,2,,18,completed
+486,2021-04-24 14:41:16,9,Follow-up in four weeks,39,completed
+487,2025-08-30 13:26:44,1,Patient advised to rest,1,completed
+488,2023-10-07 11:21:28,8,,3,completed
+489,2024-06-15 15:53:19,9,,2,completed
+490,2025-08-19 15:27:33,7,,5,completed
+491,2023-09-13 09:42:54,1,Tests ordered,1,completed
+492,2023-01-25 15:29:11,8,Tests ordered,1,completed
+493,2024-11-24 15:27:14,4,,20,completed
+494,2025-09-17 17:22:30,10,,44,completed
+495,2025-01-25 10:20:26,3,Referred to a specialist,43,completed
+496,2024-07-24 13:06:17,8,,7,completed
+497,2021-03-19 11:31:18,1,Referred to a specialist,29,completed
+498,2025-09-09 11:38:20,10,,16,cancelled
+499,2024-01-16 09:54:03,1,,5,completed
+500,2021-10-07 14:40:24,6,Tests ordered,1,completed
+501,2023-09-30 10:20:33,9,,24,completed
+502,2021-02-27 10:50:54,1,,52,completed
+503,2022-04-18 07:38:59,3,,34,completed
+504,2024-12-22 13:43:45,6,,77,completed
+505,2024-08-04 18:10:22,4,Tests ordered,10,cancelled
+506,2025-11-25 10:59:22,4,,4,completed
+507,2021-03-14 16:38:03,2,Follow-up in four weeks,22,no_show
+508,2022-09-26 09:23:18,5,Tests ordered,33,completed
+509,2024-09-21 11:59:49,4,Referred to a specialist,1,completed
+510,2024-10-29 10:04:04,10,Tests ordered,71,completed
+511,2021-05-23 17:17:40,2,,24,completed
+512,2021-01-12 10:39:47,1,,17,completed
+513,2025-11-05 09:01:20,1,Medication adjusted,18,completed
+514,2023-09-27 13:13:49,8,Patient advised to rest,21,completed
+515,2023-05-17 17:40:41,3,Medication adjusted,51,completed
+516,2025-12-15 17:08:19,10,"Routine check, no concerns",73,completed
+517,2021-02-11 13:44:11,1,,64,completed
+518,2025-12-01 15:53:19,2,,76,completed
+519,2023-03-24 11:05:16,3,Medication adjusted,13,completed
+520,2023-05-01 13:24:43,8,Medication adjusted,10,completed
+521,2025-01-11 09:01:42,2,Patient advised to rest,34,completed
+522,2021-02-06 14:11:14,6,,74,completed
+523,2021-11-11 21:45:23,2,,35,completed
+524,2022-02-16 09:27:16,4,Patient advised to rest,4,completed
+525,2025-02-18 09:56:08,7,Patient advised to rest,50,completed
+526,2025-09-20 13:36:26,4,Referred to a specialist,8,completed
+527,2021-11-13 09:25:36,2,,10,completed
+528,2022-04-18 14:16:33,8,Medication adjusted,20,completed
+529,2022-12-14 10:01:17,1,,19,completed
+530,2022-05-17 16:52:14,6,Medication adjusted,1,completed
+531,2021-10-27 13:10:48,5,Patient advised to rest,56,completed
+532,2025-03-31 21:54:45,5,,20,completed
+533,2023-11-13 12:47:13,7,Medication adjusted,9,completed
+534,2025-05-04 15:23:20,4,Referred to a specialist,4,completed
+535,2022-10-13 12:46:04,7,Referred to a specialist,11,no_show
+536,2021-09-29 16:59:52,7,,77,completed
+537,2024-01-27 10:42:18,2,,53,completed
+538,2024-07-30 13:11:14,1,Medication adjusted,59,completed
+539,2021-06-02 09:24:23,3,,44,completed
+540,2025-12-09 10:48:19,1,,21,completed
+541,2025-10-14 20:40:23,1,Referred to a specialist,6,no_show
+542,2022-03-14 12:21:36,10,Follow-up in four weeks,68,completed
+543,2024-10-19 10:42:09,6,Referred to a specialist,63,cancelled
+544,2021-01-26 20:04:26,7,,58,completed
+545,2023-04-11 10:00:36,3,Follow-up in four weeks,49,completed
+546,2025-11-02 10:09:40,5,,4,completed
+547,2024-09-07 09:35:21,2,Patient advised to rest,1,completed
+548,2021-05-02 11:02:30,10,Medication adjusted,6,completed
+549,2025-12-17 09:38:29,1,Tests ordered,59,cancelled
+550,2024-01-31 14:18:56,2,,27,completed
+551,2024-07-12 12:35:08,1,Tests ordered,43,completed
+552,2025-05-25 17:07:04,5,,24,completed
+553,2022-01-28 06:57:49,2,Follow-up in four weeks,5,completed
+554,2025-05-06 07:42:21,4,Follow-up in four weeks,43,completed
+555,2023-01-08 13:11:09,2,"Routine check, no concerns",64,cancelled
+556,2025-06-11 13:14:31,1,Referred to a specialist,45,completed
+557,2022-04-02 10:37:34,8,,4,completed
+558,2022-08-20 09:43:21,1,,39,completed
+559,2022-12-04 13:06:29,1,Referred to a specialist,69,completed
+560,2023-03-24 10:46:04,1,Tests ordered,73,completed
+561,2025-12-06 15:42:26,1,Tests ordered,3,completed
+562,2022-09-17 11:35:10,1,Referred to a specialist,40,cancelled
+563,2022-12-17 11:09:55,10,,1,completed
+564,2024-08-08 19:45:40,8,"Routine check, no concerns",24,cancelled
+565,2022-06-17 10:49:23,2,Referred to a specialist,76,completed
+566,2025-02-15 10:14:54,8,Referred to a specialist,11,completed
+567,2023-05-21 20:42:11,3,"Routine check, no concerns",74,completed
+568,2024-06-01 09:37:11,4,Referred to a specialist,2,completed
+569,2022-08-18 22:45:27,9,Medication adjusted,74,completed
+570,2024-09-22 10:10:18,1,Patient advised to rest,7,completed
+571,2024-06-20 18:40:15,1,Follow-up in four weeks,28,completed
+572,2025-05-23 10:08:46,4,Follow-up in four weeks,16,completed
+573,2021-03-23 16:59:09,1,"Routine check, no concerns",6,completed
+574,2023-12-21 16:52:21,6,Medication adjusted,75,completed
+575,2025-09-09 17:59:06,2,,1,completed
+576,2024-06-29 07:52:13,6,Tests ordered,30,completed
+577,2024-07-24 16:54:33,5,Follow-up in four weeks,17,completed
+578,2024-06-12 16:26:06,1,Tests ordered,34,completed
+579,2024-06-11 16:02:01,1,,45,completed
+580,2021-12-02 09:47:14,9,"Routine check, no concerns",17,completed
+581,2024-06-15 17:27:19,3,Patient advised to rest,13,completed
+582,2024-04-28 11:09:02,2,Follow-up in four weeks,68,completed
+583,2021-01-29 08:30:53,2,,15,completed
+584,2021-09-13 14:12:32,6,Medication adjusted,6,completed
+585,2024-04-27 14:17:32,1,Follow-up in four weeks,47,completed
+586,2025-05-06 11:15:16,4,"Routine check, no concerns",5,completed
+587,2025-08-11 17:17:45,1,Follow-up in four weeks,78,completed
+588,2025-08-31 14:21:41,1,,27,completed
+589,2022-10-05 13:01:35,8,"Routine check, no concerns",27,completed
+590,2023-01-25 14:41:17,1,,14,completed
+591,2025-04-19 11:01:24,10,Referred to a specialist,5,completed
+592,2021-07-18 11:03:26,3,Patient advised to rest,11,completed
+593,2025-05-01 19:52:30,1,,6,no_show
+594,2024-03-16 12:55:37,10,,1,completed
+595,2025-11-03 14:41:58,1,"Routine check, no concerns",66,completed
+596,2025-09-16 01:19:36,2,Tests ordered,75,completed
+597,2024-03-09 09:51:59,1,"Routine check, no concerns",37,cancelled
+598,2022-02-16 11:07:00,6,Medication adjusted,1,completed
+599,2023-02-17 09:59:37,1,,3,cancelled
+600,2025-08-14 13:51:35,2,Referred to a specialist,21,completed
+601,2021-09-09 14:58:28,1,,72,completed
+602,2024-08-16 10:23:45,2,"Routine check, no concerns",8,cancelled
+603,2024-05-16 16:03:52,1,Tests ordered,18,completed
+604,2021-09-21 14:12:26,1,Referred to a specialist,4,cancelled
+605,2023-03-21 14:52:01,1,Tests ordered,41,completed
+606,2025-08-06 17:40:43,3,Tests ordered,14,completed
+607,2025-12-22 13:03:16,7,Patient advised to rest,1,completed
+608,2024-03-06 14:47:18,9,,57,completed
+609,2023-01-01 11:03:20,5,,39,completed
+610,2022-05-25 16:37:45,6,"Routine check, no concerns",28,cancelled
+611,2025-07-31 08:40:53,8,Patient advised to rest,5,completed
+612,2025-02-11 14:33:06,2,Tests ordered,9,completed
+613,2025-08-09 15:39:56,1,Referred to a specialist,28,completed
+614,2023-11-19 08:10:19,3,Follow-up in four weeks,17,cancelled
+615,2025-09-14 20:11:48,4,Follow-up in four weeks,8,completed
+616,2022-06-29 10:32:44,4,,10,completed
+617,2023-01-16 09:32:43,9,"Routine check, no concerns",76,completed
+618,2021-05-14 07:40:43,1,Patient advised to rest,22,completed
+619,2022-08-01 09:49:27,10,Medication adjusted,25,completed
+620,2023-05-31 09:02:39,4,Tests ordered,1,completed
+621,2024-02-24 10:14:44,4,Tests ordered,67,completed
+622,2022-11-28 10:41:50,5,Follow-up in four weeks,10,completed
+623,2025-03-04 11:15:22,2,"Routine check, no concerns",58,completed
+624,2024-03-05 12:26:55,10,Tests ordered,79,completed
+625,2025-08-17 05:08:55,6,Patient advised to rest,53,completed
+626,2021-12-19 09:19:37,1,"Routine check, no concerns",39,completed
+627,2025-09-27 14:44:53,1,,1,completed
+628,2022-11-19 07:12:14,9,,28,completed
+629,2025-08-14 09:48:38,6,"Routine check, no concerns",64,completed
+630,2024-06-28 20:56:14,1,"Routine check, no concerns",4,completed
+631,2025-03-05 18:53:26,4,Referred to a specialist,43,completed
+632,2021-04-18 18:00:27,10,,52,completed
+633,2024-05-02 14:06:43,1,Follow-up in four weeks,65,completed
+634,2024-05-31 11:24:41,4,,55,completed
+635,2023-12-05 07:36:30,1,Referred to a specialist,16,cancelled
+636,2025-01-24 16:04:19,1,Patient advised to rest,6,completed
+637,2021-06-02 10:51:21,4,Tests ordered,61,cancelled
+638,2025-02-03 16:40:48,9,Tests ordered,8,no_show
+639,2021-06-26 09:56:43,9,,68,cancelled
+640,2023-08-18 11:11:35,1,Follow-up in four weeks,4,cancelled
+641,2025-03-28 14:08:49,1,Patient advised to rest,1,cancelled
+642,2025-06-23 09:02:14,10,Tests ordered,36,completed
+643,2024-08-14 13:20:30,7,Follow-up in four weeks,13,cancelled
+644,2025-05-31 11:03:32,1,,3,completed
+645,2025-03-02 16:20:31,1,Medication adjusted,8,completed
+646,2023-03-05 09:35:53,4,Medication adjusted,14,completed
+647,2024-03-21 11:58:53,1,Tests ordered,70,completed
+648,2025-11-01 10:42:57,1,,9,no_show
+649,2022-02-28 19:13:00,1,Patient advised to rest,4,completed
+650,2023-03-21 14:03:43,6,Patient advised to rest,68,completed
+651,2022-08-21 10:47:15,1,Tests ordered,1,cancelled
+652,2025-01-10 11:23:05,5,"Routine check, no concerns",62,completed
+653,2023-11-26 15:52:44,3,Follow-up in four weeks,7,completed
+654,2023-08-24 19:58:41,1,Patient advised to rest,2,completed
+655,2021-11-20 13:42:31,2,Medication adjusted,12,completed
+656,2021-09-18 11:42:15,4,Tests ordered,2,completed
+657,2022-01-03 14:51:45,8,,58,completed
+658,2021-01-30 14:58:43,7,Patient advised to rest,51,completed
+659,2021-12-04 12:09:15,1,,17,cancelled
+660,2023-10-10 09:30:55,2,Tests ordered,41,completed
+661,2024-08-06 10:53:36,3,,39,completed
+662,2023-03-18 14:25:51,1,"Routine check, no concerns",1,completed
+663,2024-06-05 10:03:31,9,Medication adjusted,12,completed
+664,2023-08-06 15:08:15,8,Tests ordered,3,no_show
+665,2023-12-09 08:18:51,2,,20,completed
+666,2022-06-17 18:02:39,7,Patient advised to rest,31,completed
+667,2021-07-09 09:48:34,3,Tests ordered,31,completed
+668,2023-03-29 10:19:00,7,Referred to a specialist,14,completed
+669,2025-02-18 00:44:45,5,Referred to a specialist,72,completed
+670,2024-10-30 15:55:53,3,Tests ordered,1,completed
+671,2021-02-04 15:08:31,2,,62,completed
+672,2025-09-14 14:25:01,1,Follow-up in four weeks,79,cancelled
+673,2024-05-03 13:55:36,7,,20,completed
+674,2022-08-27 15:57:56,4,"Routine check, no concerns",26,completed
+675,2021-10-06 09:27:34,1,,37,completed
+676,2025-11-12 14:43:52,1,"Routine check, no concerns",25,completed
+677,2024-09-22 12:01:24,4,Patient advised to rest,1,cancelled
+678,2025-10-15 18:37:00,4,Tests ordered,28,completed
+679,2023-08-15 14:58:41,1,,15,completed
+680,2025-12-13 07:58:32,3,Referred to a specialist,21,no_show
+681,2024-03-27 17:09:19,4,"Routine check, no concerns",3,no_show
+682,2025-06-11 14:28:04,3,Tests ordered,41,cancelled
+683,2022-02-18 13:03:33,1,Referred to a specialist,1,completed
+684,2024-06-14 12:47:40,4,Tests ordered,20,completed
+685,2022-05-17 08:12:50,3,Tests ordered,1,completed
+686,2021-11-09 09:43:12,3,,51,completed
+687,2021-07-13 13:39:16,3,,16,cancelled
+688,2024-05-05 13:27:57,3,Referred to a specialist,1,completed
+689,2024-03-17 14:53:04,6,Patient advised to rest,26,cancelled
+690,2025-10-15 10:11:03,6,,12,completed
+691,2023-07-30 14:18:03,1,,80,completed
+692,2025-09-05 11:00:16,5,"Routine check, no concerns",69,completed
+693,2024-03-14 14:23:57,1,"Routine check, no concerns",2,completed
+694,2025-07-22 13:51:56,3,Tests ordered,76,completed
+695,2021-05-05 10:22:07,2,,7,completed
+696,2023-07-14 14:53:44,1,,1,completed
+697,2023-09-03 10:46:23,1,Tests ordered,5,completed
+698,2024-05-06 13:59:18,6,,78,completed
+699,2024-08-19 15:07:18,9,,25,completed
+700,2022-10-24 17:06:16,1,Patient advised to rest,5,completed
+701,2023-08-27 15:45:30,7,,32,completed
+702,2025-07-18 17:27:33,3,Follow-up in four weeks,16,completed
+703,2022-09-05 08:01:58,7,,72,completed
+704,2021-02-23 11:35:42,4,Patient advised to rest,4,cancelled
+705,2025-02-03 19:00:03,5,,80,completed
+706,2025-06-21 12:06:25,9,Medication adjusted,1,completed
+707,2021-01-19 15:45:44,2,Referred to a specialist,1,no_show
+708,2023-06-27 13:21:05,2,"Routine check, no concerns",22,completed
+709,2022-06-02 10:15:01,3,Patient advised to rest,7,cancelled
+710,2025-03-04 14:53:06,2,"Routine check, no concerns",1,completed
+711,2021-06-27 12:22:19,7,Referred to a specialist,7,completed
+712,2025-08-23 18:51:11,6,Follow-up in four weeks,12,completed
+713,2024-01-23 13:53:38,3,"Routine check, no concerns",39,completed
+714,2023-02-19 11:54:31,3,,1,completed
+715,2025-12-09 09:24:50,1,Medication adjusted,32,cancelled
+716,2024-06-09 05:57:49,2,Patient advised to rest,5,completed
+717,2021-03-15 13:58:58,4,Referred to a specialist,77,completed
+718,2024-12-12 09:21:16,3,Referred to a specialist,6,completed
+719,2025-07-10 09:36:45,2,Tests ordered,23,completed
+720,2023-02-08 16:34:57,8,Referred to a specialist,21,completed
+721,2023-08-09 16:01:21,9,Medication adjusted,58,completed
+722,2022-08-31 08:17:58,2,Tests ordered,31,no_show
+723,2025-08-26 11:54:51,9,Medication adjusted,11,completed
+724,2025-08-27 10:22:36,1,Follow-up in four weeks,79,completed
+725,2023-04-07 16:05:13,1,"Routine check, no concerns",1,completed
+726,2025-01-17 16:39:22,4,Medication adjusted,11,completed
+727,2024-04-23 16:03:39,2,Medication adjusted,61,completed
+728,2025-02-03 11:13:32,1,Medication adjusted,13,completed
+729,2021-10-01 13:05:38,2,Follow-up in four weeks,77,completed
+730,2022-03-06 17:56:04,4,,38,cancelled
+731,2025-06-07 16:35:04,4,Follow-up in four weeks,69,completed
+732,2023-04-22 07:08:21,4,Tests ordered,1,no_show
+733,2024-02-25 12:33:16,1,,11,completed
+734,2025-10-09 05:25:07,1,Patient advised to rest,69,cancelled
+735,2024-06-25 10:54:51,8,,46,completed
+736,2021-11-23 15:32:55,3,,62,completed
+737,2024-01-15 14:44:56,10,,61,completed
+738,2024-11-16 06:42:56,3,Tests ordered,30,no_show
+739,2022-02-12 09:38:16,1,"Routine check, no concerns",30,completed
+740,2025-04-03 14:27:32,8,Referred to a specialist,4,completed
+741,2023-09-25 14:15:25,1,,30,completed
+742,2024-12-30 14:15:24,7,Medication adjusted,20,completed
+743,2023-08-24 16:19:23,6,Tests ordered,59,completed
+744,2025-02-22 13:16:56,6,Referred to a specialist,40,completed
+745,2021-08-09 11:57:05,2,"Routine check, no concerns",2,completed
+746,2021-07-25 15:57:19,9,"Routine check, no concerns",24,completed
+747,2021-09-02 17:31:48,2,,34,completed
+748,2022-06-10 18:19:23,4,,1,cancelled
+749,2022-08-08 18:33:40,3,Tests ordered,1,completed
+750,2023-10-21 16:38:56,9,Patient advised to rest,35,completed
+751,2025-01-01 14:27:03,2,,54,completed
+752,2022-06-04 16:56:47,10,Tests ordered,54,completed
+753,2023-01-29 17:26:18,7,Tests ordered,34,completed
+754,2025-12-30 08:42:39,9,Referred to a specialist,17,completed
+755,2024-08-27 09:37:08,1,Medication adjusted,7,completed
+756,2024-02-21 18:44:16,6,Tests ordered,50,completed
+757,2022-08-12 15:29:51,1,Referred to a specialist,77,cancelled
+758,2024-11-07 08:10:58,3,,1,completed
+759,2025-02-19 10:19:19,3,Medication adjusted,40,completed
+760,2022-06-12 16:32:08,10,,16,completed
+761,2022-06-01 09:19:05,10,Medication adjusted,69,completed
+762,2025-03-29 11:08:56,4,,39,completed
+763,2023-08-20 13:25:27,1,,3,completed
+764,2021-05-09 18:04:00,1,Referred to a specialist,49,completed
+765,2022-12-30 17:48:44,1,,4,no_show
+766,2025-04-12 14:53:26,6,Patient advised to rest,32,completed
+767,2024-01-25 11:05:31,4,Tests ordered,2,completed
+768,2025-11-15 15:20:55,5,Patient advised to rest,1,completed
+769,2023-10-09 16:53:05,9,,63,completed
+770,2025-05-25 15:22:26,2,,5,completed
+771,2022-04-22 11:16:51,1,,61,completed
+772,2023-06-27 11:58:13,3,Follow-up in four weeks,27,cancelled
+773,2024-07-29 18:36:26,5,,7,completed
+774,2025-01-23 18:07:04,8,Referred to a specialist,23,completed
+775,2023-09-24 16:01:52,7,Medication adjusted,27,completed
+776,2025-12-03 14:18:17,6,"Routine check, no concerns",33,completed
+777,2024-08-30 12:26:55,1,Medication adjusted,31,cancelled
+778,2022-09-11 12:54:34,1,Follow-up in four weeks,29,completed
+779,2024-04-28 10:44:29,1,Medication adjusted,75,completed
+780,2024-10-04 16:22:10,4,,71,completed
+781,2022-12-30 15:57:33,2,Medication adjusted,40,completed
+782,2024-07-10 17:04:58,8,Patient advised to rest,53,completed
+783,2023-01-20 18:49:44,2,Referred to a specialist,3,completed
+784,2025-06-09 16:53:58,9,Referred to a specialist,29,completed
+785,2024-09-21 15:10:31,1,Referred to a specialist,2,cancelled
+786,2023-11-05 16:11:49,8,Medication adjusted,1,completed
+787,2023-01-15 16:45:27,7,Medication adjusted,2,completed
+788,2024-01-06 19:31:57,10,,80,completed
+789,2021-06-26 11:43:44,4,Medication adjusted,80,cancelled
+790,2022-12-12 14:03:29,10,Tests ordered,9,no_show
+791,2022-02-16 17:28:23,2,,6,completed
+792,2025-05-06 14:17:37,1,,6,completed
+793,2024-08-07 11:54:04,8,"Routine check, no concerns",2,cancelled
+794,2022-01-01 09:39:43,6,Patient advised to rest,63,completed
+795,2024-07-08 14:20:13,1,,43,completed
+796,2022-05-20 11:41:22,2,Medication adjusted,58,completed
+797,2024-03-26 09:38:56,8,Medication adjusted,59,completed
+798,2023-07-05 08:48:03,3,Patient advised to rest,2,completed
+799,2021-09-29 04:21:14,1,,46,completed
+800,2024-07-08 13:01:11,1,"Routine check, no concerns",15,completed
+801,2025-01-30 14:11:31,1,Medication adjusted,17,no_show
+802,2025-04-20 11:55:14,2,Follow-up in four weeks,50,completed
+803,2023-05-18 13:06:40,1,,36,completed
+804,2025-08-10 10:40:21,9,Patient advised to rest,8,cancelled
+805,2021-04-25 12:31:07,1,Medication adjusted,62,completed
+806,2022-09-27 15:34:05,1,Follow-up in four weeks,72,completed
+807,2022-09-29 16:37:53,3,Follow-up in four weeks,38,completed
+808,2022-09-03 12:50:08,3,Patient advised to rest,14,completed
+809,2023-05-22 11:00:11,1,Tests ordered,35,completed
+810,2024-05-07 12:12:57,1,,1,completed
+811,2023-07-26 13:11:55,9,"Routine check, no concerns",39,completed
+812,2024-07-23 10:07:04,1,,77,completed
+813,2022-05-18 09:02:43,4,Follow-up in four weeks,78,completed
+814,2022-12-07 10:19:32,4,"Routine check, no concerns",1,completed
+815,2022-08-26 19:59:08,2,Patient advised to rest,21,completed
+816,2023-12-22 13:49:07,7,,46,completed
+817,2025-11-26 08:31:37,4,Follow-up in four weeks,42,completed
+818,2021-07-21 09:31:40,4,,22,completed
+819,2024-01-08 13:10:01,1,Patient advised to rest,3,completed
+820,2023-02-12 16:42:53,1,,6,completed
+821,2021-06-28 11:46:56,5,Medication adjusted,74,completed
+822,2021-09-10 11:11:35,8,,78,completed
+823,2022-07-02 16:45:19,3,Tests ordered,21,completed
+824,2022-04-24 13:45:36,2,Patient advised to rest,7,cancelled
+825,2025-12-11 13:28:50,1,Tests ordered,37,completed
+826,2025-06-24 19:08:22,1,Tests ordered,5,completed
+827,2025-01-24 12:55:47,3,Follow-up in four weeks,4,completed
+828,2022-02-01 16:28:13,7,Follow-up in four weeks,1,completed
+829,2023-05-08 19:04:56,3,Follow-up in four weeks,6,completed
+830,2021-11-14 11:15:07,9,Medication adjusted,62,completed
+831,2023-08-21 10:33:40,6,"Routine check, no concerns",4,completed
+832,2025-01-14 16:32:14,2,"Routine check, no concerns",4,no_show
+833,2025-11-07 14:04:07,4,Referred to a specialist,2,cancelled
+834,2022-09-20 16:16:47,3,"Routine check, no concerns",69,no_show
+835,2023-05-19 07:04:17,3,Follow-up in four weeks,46,completed
+836,2022-12-04 10:56:28,8,"Routine check, no concerns",36,completed
+837,2025-08-14 16:41:42,2,,27,completed
+838,2024-11-08 16:19:11,6,Referred to a specialist,16,completed
+839,2025-12-14 17:24:13,5,Referred to a specialist,26,cancelled
+840,2022-11-13 17:48:34,1,Patient advised to rest,10,cancelled
+841,2022-08-25 18:13:21,3,,1,completed
+842,2023-05-02 11:46:39,2,Referred to a specialist,52,completed
+843,2022-11-10 13:29:44,4,Tests ordered,25,completed
+844,2021-06-10 14:43:37,1,Tests ordered,18,completed
+845,2021-09-18 08:45:15,4,Referred to a specialist,38,completed
+846,2024-09-21 14:18:06,3,,2,completed
+847,2024-12-07 13:56:34,1,Follow-up in four weeks,73,completed
+848,2024-10-27 17:15:55,1,Referred to a specialist,4,cancelled
+849,2024-09-29 14:31:51,4,Referred to a specialist,1,completed
+850,2024-11-29 16:03:43,7,"Routine check, no concerns",56,completed
+851,2025-12-06 13:41:35,7,Patient advised to rest,3,completed
+852,2024-12-03 11:52:05,5,Patient advised to rest,7,completed
+853,2024-02-28 15:12:56,2,Referred to a specialist,1,completed
+854,2021-09-12 13:27:22,1,,27,completed
+855,2023-01-03 13:25:23,2,,61,completed
+856,2021-09-06 17:06:53,3,Referred to a specialist,15,completed
+857,2024-07-29 15:39:05,7,Referred to a specialist,1,completed
+858,2023-03-02 18:41:36,5,Tests ordered,9,completed
+859,2023-11-21 09:33:45,1,"Routine check, no concerns",1,completed
+860,2024-05-20 14:26:35,3,,1,cancelled
+861,2023-12-17 17:53:35,9,Medication adjusted,14,completed
+862,2022-02-13 11:41:11,2,Patient advised to rest,11,no_show
+863,2021-03-23 09:03:03,2,Follow-up in four weeks,49,completed
+864,2022-02-13 12:55:01,5,,56,completed
+865,2022-02-13 14:39:53,1,,34,completed
+866,2023-04-07 13:29:53,7,Follow-up in four weeks,14,cancelled
+867,2024-12-31 15:53:28,1,Referred to a specialist,42,completed
+868,2024-01-27 11:43:43,1,,53,completed
+869,2025-05-10 05:30:42,7,Follow-up in four weeks,12,no_show
+870,2023-12-07 19:34:07,6,"Routine check, no concerns",29,completed
+871,2024-01-21 14:56:56,3,Medication adjusted,30,completed
+872,2025-01-18 12:25:43,5,,47,completed
+873,2021-08-04 12:42:12,2,Tests ordered,67,completed
+874,2023-10-17 07:19:12,9,,71,completed
+875,2021-08-20 15:06:37,2,Follow-up in four weeks,3,completed
+876,2023-02-07 13:01:05,10,,73,cancelled
+877,2024-05-02 13:57:40,4,Follow-up in four weeks,35,completed
+878,2025-12-29 13:39:03,2,,64,completed
+879,2025-10-10 14:27:59,3,Referred to a specialist,1,cancelled
+880,2021-12-07 20:33:04,4,Patient advised to rest,2,completed
+881,2023-10-27 11:24:32,1,,29,completed
+882,2024-05-19 07:09:38,3,"Routine check, no concerns",22,completed
+883,2023-09-05 13:15:43,1,Medication adjusted,2,completed
+884,2021-03-06 16:16:27,4,Tests ordered,3,completed
+885,2025-05-29 14:19:00,10,Tests ordered,43,completed
+886,2024-12-30 18:47:31,9,Referred to a specialist,15,completed
+887,2025-03-29 10:15:31,3,,70,completed
+888,2024-09-08 16:17:50,3,,8,completed
+889,2023-12-20 13:09:44,6,"Routine check, no concerns",60,completed
+890,2025-11-23 16:05:19,8,Follow-up in four weeks,37,completed
+891,2022-08-23 15:45:37,3,Patient advised to rest,80,cancelled
+892,2025-03-03 17:42:42,9,Referred to a specialist,1,completed
+893,2025-04-09 16:24:00,3,Patient advised to rest,62,cancelled
+894,2023-09-02 17:21:55,2,Follow-up in four weeks,1,completed
+895,2024-02-03 11:41:36,1,,9,completed
+896,2024-01-19 11:59:05,7,"Routine check, no concerns",51,completed
+897,2022-06-24 14:35:00,7,Follow-up in four weeks,1,completed
+898,2025-08-06 17:15:48,1,Medication adjusted,45,cancelled
+899,2025-08-17 16:13:52,9,,5,completed
+900,2025-11-16 11:06:19,3,Medication adjusted,1,completed
+901,2024-10-01 17:41:31,1,Referred to a specialist,16,completed
+902,2025-01-24 19:08:29,7,Medication adjusted,47,completed
+903,2024-03-19 09:42:33,1,Medication adjusted,36,completed
+904,2023-12-06 11:19:57,3,,34,cancelled
+905,2021-04-03 14:20:44,1,,6,completed
+906,2025-05-29 15:22:02,4,,12,completed
+907,2021-04-15 12:46:12,3,,1,completed
+908,2022-07-13 10:00:17,10,,1,completed
+909,2023-12-29 13:17:50,1,Referred to a specialist,2,cancelled
+910,2025-10-16 09:21:31,3,Referred to a specialist,13,completed
+911,2021-09-27 16:45:57,3,,28,completed
+912,2024-09-16 16:41:38,6,Tests ordered,76,completed
+913,2023-06-13 11:35:05,3,Medication adjusted,2,completed
+914,2023-01-04 14:37:49,6,Patient advised to rest,24,completed
+915,2025-10-29 07:37:55,4,Referred to a specialist,1,completed
+916,2022-08-27 17:44:43,1,,3,completed
+917,2023-08-24 18:34:05,7,Medication adjusted,3,completed
+918,2021-10-02 16:52:04,2,,28,completed
+919,2024-04-17 13:43:48,2,Follow-up in four weeks,1,completed
+920,2023-09-30 10:09:55,6,Medication adjusted,1,completed
+921,2023-05-11 15:00:55,1,Tests ordered,13,no_show
+922,2024-06-01 06:10:00,8,"Routine check, no concerns",12,cancelled
+923,2024-11-06 12:37:30,4,Follow-up in four weeks,48,completed
+924,2024-05-03 11:55:43,1,Follow-up in four weeks,1,completed
+925,2024-04-17 10:39:14,10,Follow-up in four weeks,19,completed
+926,2024-05-21 18:32:07,2,,26,cancelled
+927,2024-12-19 13:57:53,5,Patient advised to rest,36,completed
+928,2025-03-04 18:31:39,1,Tests ordered,14,completed
+929,2024-12-14 17:24:36,8,,1,completed
+930,2023-02-11 14:52:05,4,Patient advised to rest,50,completed
+931,2025-07-16 18:21:00,1,Tests ordered,4,completed
+932,2024-01-16 16:13:36,1,Referred to a specialist,28,completed
+933,2024-06-26 04:45:30,1,Medication adjusted,50,completed
+934,2022-02-01 20:59:10,1,Medication adjusted,18,completed
+935,2025-04-11 12:48:37,1,Medication adjusted,23,completed
+936,2025-01-29 13:57:56,9,,7,completed
+937,2025-05-24 18:49:33,1,,77,completed
+938,2025-09-27 13:08:37,7,"Routine check, no concerns",47,completed
+939,2025-06-14 12:29:21,4,,19,completed
+940,2021-10-09 16:05:35,6,,9,completed
+941,2024-01-07 12:51:00,8,Follow-up in four weeks,1,completed
+942,2024-09-02 11:26:25,9,Patient advised to rest,5,completed
+943,2024-02-29 12:51:31,9,Follow-up in four weeks,22,completed
+944,2023-02-11 15:48:13,1,Referred to a specialist,40,completed
+945,2025-10-03 13:28:41,4,Patient advised to rest,73,completed
+946,2025-04-03 16:18:37,4,Patient advised to rest,14,cancelled
+947,2025-09-19 14:49:10,1,Referred to a specialist,11,completed
+948,2022-05-08 13:49:44,1,,31,cancelled
+949,2025-07-10 13:22:43,4,Tests ordered,39,completed
+950,2024-08-26 13:34:20,1,,1,completed
+951,2023-03-18 12:17:51,3,Patient advised to rest,55,completed
+952,2024-10-04 12:54:34,6,Tests ordered,63,completed
+953,2021-02-18 08:01:13,9,Patient advised to rest,2,completed
+954,2025-02-06 11:33:50,4,"Routine check, no concerns",2,completed
+955,2024-10-25 11:17:13,5,Medication adjusted,5,completed
+956,2025-10-24 11:12:24,4,Follow-up in four weeks,10,completed
+957,2022-08-22 12:15:23,1,Patient advised to rest,5,completed
+958,2023-11-26 17:37:32,2,Patient advised to rest,51,completed
+959,2025-12-21 17:39:16,2,Patient advised to rest,7,completed
+960,2025-08-24 14:31:05,5,Tests ordered,1,completed
+961,2025-08-08 07:51:40,7,"Routine check, no concerns",1,completed
+962,2025-10-16 16:40:28,1,,24,completed
+963,2024-11-01 09:53:39,10,,30,completed
+964,2022-02-17 17:18:44,4,,5,completed
+965,2023-06-22 13:50:50,8,,26,completed
+966,2022-04-27 10:12:21,1,,67,completed
+967,2023-07-20 10:16:25,2,Medication adjusted,31,completed
+968,2023-05-29 15:45:26,5,,14,completed
+969,2025-07-09 16:16:54,3,Medication adjusted,3,completed
+970,2023-05-14 19:56:46,3,,2,completed
+971,2025-07-19 09:28:25,6,,44,completed
+972,2022-08-28 12:21:58,5,"Routine check, no concerns",7,completed
+973,2023-12-27 16:00:14,6,Medication adjusted,3,cancelled
+974,2025-05-31 15:54:05,4,,65,completed
+975,2025-05-21 15:45:48,3,,67,completed
+976,2024-07-01 14:22:16,2,Tests ordered,1,completed
+977,2023-10-23 09:43:44,6,,25,completed
+978,2022-01-16 09:22:27,1,Follow-up in four weeks,7,completed
+979,2021-03-10 08:51:00,1,,20,completed
+980,2021-10-05 09:46:32,1,,1,completed
+981,2023-07-27 09:37:27,1,,3,cancelled
+982,2023-10-24 16:32:51,1,Follow-up in four weeks,47,cancelled
+983,2022-12-31 18:17:56,2,Medication adjusted,45,completed
+984,2024-12-31 10:48:09,5,Tests ordered,4,completed
+985,2023-02-20 12:36:18,3,Medication adjusted,3,completed
+986,2023-06-05 20:06:46,10,,28,completed
+987,2024-09-02 15:21:57,2,Patient advised to rest,24,cancelled
+988,2025-07-29 13:43:35,3,,6,completed
+989,2024-02-29 13:07:26,7,Medication adjusted,56,completed
+990,2023-04-22 11:31:04,10,Referred to a specialist,4,completed
+991,2021-12-27 10:28:46,1,Referred to a specialist,26,cancelled
+992,2024-06-09 18:31:49,9,"Routine check, no concerns",12,completed
+993,2023-12-23 16:45:42,5,Referred to a specialist,8,completed
+994,2021-04-07 13:04:55,3,"Routine check, no concerns",13,completed
+995,2021-03-09 14:02:57,1,Follow-up in four weeks,27,completed
+996,2024-12-23 12:32:34,1,Follow-up in four weeks,41,completed
+997,2025-11-08 15:37:00,10,,16,completed
+998,2025-03-14 13:16:13,1,,34,completed
+999,2024-04-24 14:23:20,5,"Routine check, no concerns",51,completed
+1000,2021-07-11 15:46:42,2,Follow-up in four weeks,23,cancelled
