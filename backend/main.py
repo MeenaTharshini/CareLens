@@ -54,6 +54,7 @@ app.add_middleware(
         "https://care-lens-roan.vercel.app",
         "https://care-lens-spra-luqwy80ce-meena-tharshini-is-projects.vercel.app",
     ],
+    
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
