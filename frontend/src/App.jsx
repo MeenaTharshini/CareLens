@@ -26,6 +26,7 @@ Phone,
 MapPin,
 UserRound,
 } from "lucide-react";
+import PatientManagement from "./PatientManagement";
 import {
   ResponsiveContainer,
   Tooltip,
@@ -998,7 +999,11 @@ function QualityDashboard({
 }
 
 function PatientWorkspace() {
-  return <Patient360 />;
+  return (
+    <div className="workspace-content">
+      <Patient360 />
+    </div>
+  );
 }
 
 function AttendanceWorkspace() {
@@ -1855,6 +1860,7 @@ function App() {
     quality: "Quality Intelligence",
     attendance: "Attendance Analytics",
     patient: "Patient 360",
+    "patient-management": "Patient Management",
     followups: "Follow-up Alerts",
   }[activeView];
 
@@ -1877,6 +1883,16 @@ function App() {
         <button className={`nav-item ${activeView === "patient" ? "active" : ""}`} onClick={() => setActiveView("patient")}>
           <Users size={19} /><span>Patient 360</span>
         </button>
+        <button
+  type="button"
+  className={`nav-item ${
+    activeView === "patient-management" ? "active" : ""
+  }`}
+  onClick={() => setActiveView("patient-management")}
+>
+  <ClipboardList size={19} />
+  <span>Patient Management</span>
+</button>
         <button
   className={`nav-item ${activeView === "followups" ? "active" : ""}`}
   onClick={() => setActiveView("followups")}
@@ -1928,6 +1944,8 @@ function App() {
   <AttendanceWorkspace />
 ) : activeView === "patient" ? (
   <PatientWorkspace />
+  ) : activeView === "patient-management" ? (
+  <PatientManagement />
 ) : activeView === "followups" ? (
   <FollowUpWorkspace
     onPendingCountChange={setPendingFollowUpCount}
