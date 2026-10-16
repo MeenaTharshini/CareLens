@@ -778,7 +778,7 @@ function QualityDashboard({
       <CareGapWorklist gaps={gaps} />
 
       <div className="chart-grid">
-       
+        
 
         <Panel title="Care-gap categories" subtitle="Types of candidate gaps returned by the API">
           {gapCategories.length ? (
@@ -979,21 +979,6 @@ function QualityDashboard({
         )}
       </Panel>
 
-      <Panel title="Dataset inventory" subtitle="Source tables available to the analytics platform">
-        {Object.keys(files).length ? (
-          <div className="inventory-grid">
-            {Object.entries(files).map(([name, table]) => (
-              <div className="inventory-card" key={name}>
-                <span>{titleCase(name)}</span>
-                <strong>{formatNumber(table?.rows)}</strong>
-                <small>rows · {formatNumber(table?.columns)} columns</small>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <EmptyState title="Dataset inventory unavailable" message="The summary endpoint did not return a files or tables collection." />
-        )}
-      </Panel>
 
       <p className="footnote">
         Metrics depend on the available dataset and calculation definitions. Historical records and incomplete documentation can limit interpretation. Verify each care-gap candidate against source records before treating it as confirmed.
@@ -1839,40 +1824,77 @@ function OverdueNotificationMonitor({ onOverdueCountChange }) {
           return;
         }
 
-        for (const item of overdueFollowUps) {
-          if (disposed) return;
-          const key = overdueFollowUpKey(item);
-          if (notifiedKeys.current.has(key)) continue;
+        const notificationEligible = "Notification" in window && Notification.permission === "granted";
+        if (!notificationEligible) return;
 
-          const patientLabel = item.patient_name
-            ? `Patient: ${item.patient_name}`
-            : `Patient ID: ${item.patient_id ?? "Unknown"}`;
-          const followUpTitle = item.title || item.reason || "Follow-up";
-          const days = Number(item.days_overdue);
-
+        const saveNotificationKey = (key) => {
+          notifiedKeys.current.add(key);
           try {
-            const notification = new Notification("CareLens — Overdue follow-up", {
-              body: `${patientLabel}\n${followUpTitle} is ${days} day${days === 1 ? "" : "s"} overdue. Due: ${item.due_date || "date unavailable"}.`,
-              tag: `carelens-overdue-${key}`,
+            window.localStorage.setItem(
+              NOTIFIED_OVERDUE_STORAGE_KEY,
+              JSON.stringify([...notifiedKeys.current])
+            );
+          } catch (storageError) {
+            console.warn("CareLens could not save notification history:", storageError);
+          }
+        };
+
+        const showNotificationOnce = (key, title, body) => {
+          if (notifiedKeys.current.has(key)) return;
+          try {
+            const notification = new Notification(title, {
+              body,
+              tag: `carelens-${key}`,
               renotify: false,
             });
             notification.onclick = () => {
               window.focus();
               notification.close();
             };
-
-            notifiedKeys.current.add(key);
-            try {
-              window.localStorage.setItem(
-                NOTIFIED_OVERDUE_STORAGE_KEY,
-                JSON.stringify([...notifiedKeys.current])
-              );
-            } catch (storageError) {
-              console.warn("CareLens could not save notification history:", storageError);
-            }
+            saveNotificationKey(key);
           } catch (notificationError) {
             console.error("CareLens could not display a browser notification:", notificationError);
           }
+        };
+
+        for (const item of overdueFollowUps) {
+          if (disposed) return;
+          const key = overdueFollowUpKey(item);
+          const patientLabel = item.patient_name
+            ? `Patient: ${item.patient_name}`
+            : `Patient ID: ${item.patient_id ?? "Unknown"}`;
+          const followUpTitle = item.title || item.reason || "Follow-up";
+          const days = Number(item.days_overdue);
+          showNotificationOnce(
+            key,
+            "CareLens — Overdue follow-up",
+            `${patientLabel}\n${followUpTitle} is ${days} day${days === 1 ? "" : "s"} overdue. Due: ${item.due_date || "date unavailable"}.`
+          );
+        }
+
+        // Remind once the day before and again on the due date. Keys include
+        // the due date so a rescheduled follow-up starts a fresh reminder cycle.
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        for (const item of activeFollowUps) {
+          if (disposed) return;
+          if (!item.due_date) continue;
+          const due = new Date(`${String(item.due_date).slice(0, 10)}T00:00:00`);
+          if (Number.isNaN(due.getTime())) continue;
+          const daysUntilDue = Math.round((due.getTime() - today.getTime()) / 86_400_000);
+          if (daysUntilDue !== 0 && daysUntilDue !== 1) continue;
+
+          const baseKey = overdueFollowUpKey(item);
+          const reminderKind = daysUntilDue === 1 ? "advance-reminder" : "due-today";
+          const patientLabel = item.patient_name
+            ? `Patient: ${item.patient_name}`
+            : `Patient ID: ${item.patient_id ?? "Unknown"}`;
+          const followUpTitle = item.title || item.reason || "Follow-up";
+          const notificationTitle = daysUntilDue === 1
+            ? "CareLens — Follow-up due tomorrow"
+            : "CareLens — Follow-up due today";
+          const body = `${patientLabel}\n${followUpTitle}. Due: ${String(item.due_date).slice(0, 10)}.`;
+          showNotificationOnce(`${reminderKind}-${baseKey}`, notificationTitle, body);
         }
       } catch (checkError) {
         // Keep the dashboard usable if the follow-up endpoint is temporarily unavailable.
@@ -1884,10 +1906,14 @@ function OverdueNotificationMonitor({ onOverdueCountChange }) {
 
     checkOverdueFollowUps();
     const intervalId = window.setInterval(checkOverdueFollowUps, 60_000);
+    // Let the user trigger an immediate check after granting browser permission.
+    const handleManualCheck = () => checkOverdueFollowUps();
+    window.addEventListener("carelens-check-overdue", handleManualCheck);
 
     return () => {
       disposed = true;
       window.clearInterval(intervalId);
+      window.removeEventListener("carelens-check-overdue", handleManualCheck);
     };
   }, [onOverdueCountChange]);
 
@@ -1928,9 +1954,9 @@ function App() {
       const permission = await Notification.requestPermission();
       setBrowserNotificationPermission(permission);
       if (permission === "granted") {
-        // The monitor checks immediately on its normal polling cycle; trigger a
-        // reload-free confirmation that permission is enabled in the UI.
         setStatusMessageForNotifications("Desktop notifications enabled.");
+        // Check overdue records immediately instead of waiting up to 60 seconds.
+        window.dispatchEvent(new Event("carelens-check-overdue"));
       } else if (permission === "denied") {
         setStatusMessageForNotifications("Notifications are blocked by your browser. Allow them in site settings.");
       } else {

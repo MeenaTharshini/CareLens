@@ -250,12 +250,8 @@ export default function PatientManagement() {
       const response = await fetch(`${API_BASE}/api/follow-ups/${encodeURIComponent(item.id)}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          status: item.status || "Pending",
-          assigned_to: item.assigned_to || null,
-          notes: item.notes || "",
-          due_date: nextDate,
-        }),
+        // Send only the field being edited so other follow-up data is preserved.
+        body: JSON.stringify({ due_date: nextDate }),
       });
       if (!response.ok) throw new Error(await readApiError(response));
       const body = await response.json().catch(() => ({}));
@@ -323,6 +319,7 @@ export default function PatientManagement() {
       age: form.date_of_birth ? Number(ageFromDob(form.date_of_birth)) : Number(form.age),
       gender: form.gender, email: form.email.trim(), phone: form.phone.trim(),
       address: form.address.trim(), emergency_contact: form.emergency_contact.trim(),
+      next_visit_date: form.next_visit_date || null,
     };
     try {
       let response;
@@ -460,6 +457,10 @@ export default function PatientManagement() {
             <FormField label="Date visited" required><div className="pm-input-with-icon"><CalendarDays size={16} /><input name="visit_date" type="date" value={form.visit_date} onChange={updateForm} required /></div></FormField>
             <FormField label="Next follow-up date"><div className="pm-input-with-icon"><Clock3 size={16} /><input name="next_visit_date" type="date" value={form.next_visit_date} min={form.visit_date || undefined} onChange={updateForm} /></div></FormField>
             <FormField label="Visit notes" className="pm-field-full"><textarea name="visit_notes" value={form.visit_notes} onChange={updateForm} maxLength={2000} rows={3} placeholder="Optional notes about this visit" /></FormField>
+          </div></div>}
+          {editing && <div className="pm-form-section"><div className="pm-form-section-title"><CalendarClock size={17} /><h3>Follow-up scheduling</h3></div><div className="pm-form-grid">
+            <FormField label="Next visit / follow-up date"><div className="pm-input-with-icon"><Clock3 size={16} /><input name="next_visit_date" type="date" value={form.next_visit_date} onChange={updateForm} /></div></FormField>
+            <p className="pm-field-help pm-field-full">Changing this date creates or reschedules the automatically managed “Next visit follow-up”. Manually created follow-ups are not changed.</p>
           </div></div>}
 
           {formError && <div className="pm-alert pm-alert-error pm-form-error"><AlertCircle size={18} /><span>{formError}</span></div>}

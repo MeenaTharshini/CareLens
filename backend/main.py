@@ -66,10 +66,13 @@ def init_manual_patients_table():
             CREATE TABLE IF NOT EXISTS patient_profile_overrides (
                 patient_id TEXT PRIMARY KEY, first_name TEXT, last_name TEXT, name TEXT,
                 date_of_birth TEXT, age INTEGER, gender TEXT, email TEXT, phone TEXT,
-                address TEXT, emergency_contact TEXT,
+                address TEXT, emergency_contact TEXT, next_visit_date TEXT,
                 updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
             )
         """)
+        override_columns = {row[1] for row in connection.execute("PRAGMA table_info(patient_profile_overrides)").fetchall()}
+        if "next_visit_date" not in override_columns:
+            connection.execute("ALTER TABLE patient_profile_overrides ADD COLUMN next_visit_date TEXT")
 
 
 init_manual_patients_table()
@@ -104,6 +107,7 @@ class PatientProfileUpdate(BaseModel):
     phone: str | None = Field(default=None, max_length=30)
     address: str | None = Field(default=None, max_length=500)
     emergency_contact: str | None = Field(default=None, max_length=150)
+    next_visit_date: date | None = None
 
 
 class CareGapReviewUpdate(BaseModel):
@@ -127,6 +131,7 @@ class FollowUpUpdate(BaseModel):
     due_date: date | None = None
     assigned_to: str | None = Field(default=None, max_length=120)
     notes: str | None = Field(default=None, max_length=2000)
+
 
 def _clean_records(df, mask=None):
     if df is None:
@@ -159,7 +164,7 @@ def _get_patient_override(patient_id: str) -> dict:
     with get_db_connection() as connection:
         row = connection.execute("""
             SELECT first_name, last_name, name, date_of_birth, age, gender,
-                   email, phone, address, emergency_contact
+                   email, phone, address, emergency_contact, next_visit_date
             FROM patient_profile_overrides WHERE patient_id = ?
         """, (str(patient_id),)).fetchone()
     return dict(row) if row else {}
@@ -168,7 +173,11 @@ def _get_patient_override(patient_id: str) -> dict:
 def _apply_patient_override(patient: dict) -> dict:
     result = dict(patient)
     for key, value in _get_patient_override(str(result.get("id", ""))).items():
-        if value is not None:
+        # Empty-string next_visit_date is an explicit clear marker for imported
+        # patients; NULL means no override was ever saved by older versions.
+        if key == "next_visit_date" and value == "":
+            result[key] = None
+        elif value is not None:
             result[key] = value
     return result
 
@@ -192,6 +201,53 @@ def patient_exists(patient_id: str) -> bool:
     if patients is None or "id" not in patients.columns:
         raise HTTPException(status_code=500, detail="Patient data or patient ID column is unavailable.")
     return bool(_matches_id(patients["id"], patient_id).any())
+
+
+def sync_next_visit_followup(patient: dict):
+    """Create/reschedule the system-owned follow-up for a patient's next visit date.
+
+    Manual follow-ups are never changed. Clearing a next-visit date cancels only
+    its active system-generated follow-up, preserving the audit history.
+    """
+    patient_id = str(patient.get("id", "")).strip()
+    next_visit = patient.get("next_visit_date")
+    if not patient_id:
+        return None
+    auto_items = [item for item in list_followups(include_closed=True)
+                  if str(item.get("patient_id")) == patient_id and bool(item.get("auto_generated"))]
+    active = next((item for item in sorted(auto_items, key=lambda x: int(x["id"]), reverse=True)
+                   if item.get("status") not in CLOSED_STATUSES_FOR_SYNC), None)
+    if not next_visit:
+        # Clearing a scheduled next visit cancels only its active system-generated
+        # follow-up. Manually created follow-ups are never touched.
+        if active:
+            update_followup(int(active["id"]), status="Cancelled")
+        return None
+    next_visit = date.fromisoformat(str(next_visit)[:10]).isoformat()
+    patient_name = str(patient.get("name") or " ".join(
+        part for part in (patient.get("first_name"), patient.get("last_name")) if part
+    ) or f"Patient {patient_id}").strip()
+    diagnosis = str(patient.get("disease") or patient.get("diagnosis") or "routine review").strip()
+    if active:
+        if str(active.get("due_date", ""))[:10] != next_visit:
+            update_followup(int(active["id"]), due_date=next_visit)
+        return get_followup(int(active["id"]))
+    # Do not reopen or duplicate an already completed/cancelled follow-up for the
+    # same visit date. A different visit date represents a new follow-up cycle.
+    if any(str(item.get("due_date", ""))[:10] == next_visit for item in auto_items):
+        return None
+    return create_followup(
+        patient_id=patient_id,
+        title="Next visit follow-up",
+        reason=f"Automatically scheduled for {patient_name}; visit reason: {diagnosis}.",
+        due_date=next_visit,
+        priority="Medium",
+        assigned_to=None,
+        auto_generated=True,
+    )
+
+
+CLOSED_STATUSES_FOR_SYNC = {"Completed", "Cancelled"}
 
 
 @app.get("/")
@@ -277,7 +333,11 @@ def add_patient(payload: ManualPatientCreate):
             ))
             patient_id = cursor.lastrowid
         patient = _get_manual_patient(f"MAN-{patient_id}")
-        return {"message": "Patient added successfully.", "patient": patient}
+        auto_followup = sync_next_visit_followup(patient) if patient.get("next_visit_date") else None
+        response = {"message": "Patient added successfully.", "patient": patient}
+        if auto_followup:
+            response["auto_follow_up"] = enrich_followup(auto_followup)
+        return response
     except sqlite3.Error as error:
         raise HTTPException(status_code=500, detail=f"Could not save patient: {error}")
 
@@ -342,10 +402,11 @@ def update_patient_profile(patient_id: str, payload: PatientProfileUpdate):
     for field in ("gender", "email", "phone", "address", "emergency_contact"):
         if field in updates and updates[field] is not None:
             updates[field] = updates[field].strip()
-    if updates.get("date_of_birth") is not None:
-        updates["date_of_birth"] = updates["date_of_birth"].isoformat()
+    for date_field in ("date_of_birth", "next_visit_date"):
+        if updates.get(date_field) is not None:
+            updates[date_field] = updates[date_field].isoformat()
 
-    allowed = {"name", "first_name", "last_name", "date_of_birth", "age", "gender", "email", "phone", "address", "emergency_contact"}
+    allowed = {"name", "first_name", "last_name", "date_of_birth", "age", "gender", "email", "phone", "address", "emergency_contact", "next_visit_date"}
     updates = {key: value for key, value in updates.items() if key in allowed}
     if manual is not None:
         if updates:
@@ -356,27 +417,34 @@ def update_patient_profile(patient_id: str, payload: PatientProfileUpdate):
         updated = _get_manual_patient(patient_id)
     else:
         merged = {**_get_patient_override(patient_id), **updates}
+        if "next_visit_date" in updates and updates["next_visit_date"] is None:
+            merged["next_visit_date"] = ""
         with get_db_connection() as connection:
             connection.execute("""
                 INSERT INTO patient_profile_overrides (
                     patient_id, first_name, last_name, name, date_of_birth, age,
-                    gender, email, phone, address, emergency_contact, updated_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+                    gender, email, phone, address, emergency_contact, next_visit_date, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
                 ON CONFLICT(patient_id) DO UPDATE SET
                     first_name=excluded.first_name, last_name=excluded.last_name,
                     name=excluded.name, date_of_birth=excluded.date_of_birth,
                     age=excluded.age, gender=excluded.gender, email=excluded.email,
                     phone=excluded.phone, address=excluded.address,
-                    emergency_contact=excluded.emergency_contact, updated_at=CURRENT_TIMESTAMP
+                    emergency_contact=excluded.emergency_contact,
+                    next_visit_date=excluded.next_visit_date, updated_at=CURRENT_TIMESTAMP
             """, (
                 patient_id, merged.get("first_name"), merged.get("last_name"),
                 merged.get("name"), merged.get("date_of_birth"), merged.get("age"),
                 merged.get("gender"), merged.get("email"), merged.get("phone"),
-                merged.get("address"), merged.get("emergency_contact"),
+                merged.get("address"), merged.get("emergency_contact"), merged.get("next_visit_date"),
             ))
         _, original = _require_imported_patient(patient_id)
         updated = _apply_patient_override(original)
-    return {"message": "Patient profile updated successfully.", "patient": updated}
+    auto_followup = sync_next_visit_followup(updated)
+    response = {"message": "Patient profile updated successfully.", "patient": updated}
+    if auto_followup:
+        response["auto_follow_up"] = enrich_followup(auto_followup)
+    return response
 
 
 @app.get("/api/patients/{patient_id}")
@@ -584,11 +652,25 @@ def get_followup_details(followup_id: int):
 
 @app.patch("/api/follow-ups/{followup_id}")
 def save_followup(followup_id: int, payload: FollowUpUpdate):
-    if payload.status not in STATUSES:
-        raise HTTPException(status_code=422, detail={"message": "Invalid follow-up status.", "allowed_statuses": sorted(STATUSES)})
     if not get_followup(followup_id):
         raise HTTPException(status_code=404, detail="Follow-up not found.")
-    item = update_followup(followup_id=followup_id, status=payload.status, assigned_to=payload.assigned_to.strip() if payload.assigned_to else None, notes=payload.notes.strip())
+    changes = payload.model_dump(exclude_unset=True)
+    if not changes:
+        raise HTTPException(status_code=400, detail="No follow-up fields were provided.")
+    if "status" in changes and changes["status"] is not None and changes["status"] not in STATUSES:
+        raise HTTPException(status_code=422, detail={"message": "Invalid follow-up status.", "allowed_statuses": sorted(STATUSES)})
+    if "due_date" in changes:
+        if changes["due_date"] is None:
+            raise HTTPException(status_code=422, detail="due_date cannot be empty.")
+        changes["due_date"] = changes["due_date"].isoformat()
+    if "assigned_to" in changes and changes["assigned_to"] is not None:
+        changes["assigned_to"] = changes["assigned_to"].strip() or None
+    if "notes" in changes and changes["notes"] is not None:
+        changes["notes"] = changes["notes"].strip()
+    try:
+        item = update_followup(followup_id=followup_id, **changes)
+    except ValueError as error:
+        raise HTTPException(status_code=422, detail=str(error))
     return {"follow_up": enrich_followup(item)}
 
 
