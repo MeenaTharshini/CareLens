@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Activity,
   AlertTriangle,
@@ -169,6 +169,18 @@ function getFiles(summary) {
 
 function getMetric(metrics, keys) {
   return asNumber(firstValue(metrics, keys));
+}
+
+function extractPatientList(response) {
+  if (Array.isArray(response)) return response;
+
+  const candidates = [
+    response?.patients,
+    response?.items,
+    response?.results,
+  ];
+
+  return candidates.find(Array.isArray) ?? [];
 }
 
 function getTableRows(validation) {
@@ -551,6 +563,8 @@ function QualityDashboard({
   summary,
   validation,
   gaps,
+  patientDirectory,
+  patientDirectoryLoaded,
   loading,
   onRefresh,
   population,
@@ -562,8 +576,10 @@ function QualityDashboard({
   const files = getFiles(summary);
   const validationTables = getTableRows(validation);
 
-  const patients = getMetric(metrics, ["total_patients", "patient_count"])
-    ?? asNumber(files?.patients?.rows);
+  // Registered patients come from the live combined patient directory.
+  // The summary inventory below remains the imported-source dataset count.
+  const patients = patientDirectoryLoaded ? patientDirectory.length : null;
+  const importedPatients = asNumber(files?.patients?.rows);
 
   const appointments = getMetric(metrics, [
     "total_appointments", "appointment_count", "all_appointment_records",
@@ -728,7 +744,13 @@ function QualityDashboard({
       </div>
 
       <div className="metric-grid">
-        <MetricCard icon={Users} label="Registered patients" value={formatNumber(patients)} description="Patients in the source database" tone="blue" />
+        <MetricCard
+          icon={Users}
+          label="Registered patients"
+          value={formatNumber(patients)}
+          description={`Live patient directory${importedPatients !== null ? ` · ${formatNumber(importedPatients)} imported source rows` : ""}`}
+          tone="blue"
+        />
         <MetricCard icon={CalendarDays} label="Appointment records" value={formatNumber(appointments)} description="Recorded appointments in the dataset" tone="purple" />
         <MetricCard icon={CheckCircle2} label="Completion rate" value={formatPercent(completion)} description="Reported appointment completion metric" tone="green" />
         <MetricCard icon={Activity} label="No-show rate" value={formatPercent(noShow)} description="Reported missed-appointment metric" tone="orange" />
@@ -756,25 +778,7 @@ function QualityDashboard({
       <CareGapWorklist gaps={gaps} />
 
       <div className="chart-grid">
-        <Panel title="Appointment status" subtitle="Distribution of recorded statuses">
-          {statusDistribution.length ? (
-            <div className="chart-area chart-donut">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie data={statusDistribution} dataKey="value" nameKey="name" cx="50%" cy="45%" innerRadius={54} outerRadius={86} paddingAngle={3} stroke="none">
-                    {statusDistribution.map((item, index) => (
-                      <Cell key={item.name} fill={STATUS_COLORS[item.name.toLowerCase()] || CHART_COLORS[index % CHART_COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip content={<ChartTooltip />} />
-                  <Legend verticalAlign="bottom" />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-          ) : (
-            <EmptyState title="Status breakdown unavailable" message="The metrics endpoint did not return an appointment status distribution." />
-          )}
-        </Panel>
+       
 
         <Panel title="Care-gap categories" subtitle="Types of candidate gaps returned by the API">
           {gapCategories.length ? (
@@ -1776,12 +1780,130 @@ function FollowUpWorkspace({ onPendingCountChange }) {
 }
 
 
+const NOTIFIED_OVERDUE_STORAGE_KEY = "carelens-notified-overdue-v1";
+
+function readNotifiedOverdueKeys() {
+  try {
+    const raw = window.localStorage.getItem(NOTIFIED_OVERDUE_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return new Set(Array.isArray(parsed) ? parsed.map(String) : []);
+  } catch {
+    return new Set();
+  }
+}
+
+function followUpIsClosed(status) {
+  return ["completed", "complete", "closed", "cancelled", "canceled"]
+    .includes(String(status ?? "").trim().toLowerCase());
+}
+
+function overdueFollowUpKey(item) {
+  // Include due_date so rescheduling a follow-up creates a new notification cycle.
+  const id = item.id ?? item.follow_up_id ??
+    `${item.patient_id ?? "unknown"}-${item.title ?? "follow-up"}`;
+  return `${id}-${String(item.due_date ?? "no-date").slice(0, 10)}`;
+}
+
+function OverdueNotificationMonitor({ onOverdueCountChange }) {
+  const notifiedKeys = useRef(null);
+  const checkingRef = useRef(false);
+
+  if (notifiedKeys.current === null) {
+    notifiedKeys.current = readNotifiedOverdueKeys();
+  }
+
+  useEffect(() => {
+    let disposed = false;
+
+    const checkOverdueFollowUps = async () => {
+      if (checkingRef.current) return;
+      checkingRef.current = true;
+
+      try {
+        const response = await request("/api/follow-ups?include_closed=false");
+        if (disposed) return;
+
+        const followUps = Array.isArray(response)
+          ? response
+          : response?.follow_ups ?? response?.items ?? [];
+        const activeFollowUps = followUps.filter(
+          (item) => !followUpIsClosed(item.status)
+        );
+        const overdueFollowUps = activeFollowUps.filter(
+          (item) => Number(item.days_overdue ?? 0) > 0
+        );
+
+        onOverdueCountChange(overdueFollowUps.length);
+
+        if (!("Notification" in window) || Notification.permission !== "granted") {
+          return;
+        }
+
+        for (const item of overdueFollowUps) {
+          if (disposed) return;
+          const key = overdueFollowUpKey(item);
+          if (notifiedKeys.current.has(key)) continue;
+
+          const patientLabel = item.patient_name
+            ? `Patient: ${item.patient_name}`
+            : `Patient ID: ${item.patient_id ?? "Unknown"}`;
+          const followUpTitle = item.title || item.reason || "Follow-up";
+          const days = Number(item.days_overdue);
+
+          try {
+            const notification = new Notification("CareLens — Overdue follow-up", {
+              body: `${patientLabel}\n${followUpTitle} is ${days} day${days === 1 ? "" : "s"} overdue. Due: ${item.due_date || "date unavailable"}.`,
+              tag: `carelens-overdue-${key}`,
+              renotify: false,
+            });
+            notification.onclick = () => {
+              window.focus();
+              notification.close();
+            };
+
+            notifiedKeys.current.add(key);
+            try {
+              window.localStorage.setItem(
+                NOTIFIED_OVERDUE_STORAGE_KEY,
+                JSON.stringify([...notifiedKeys.current])
+              );
+            } catch (storageError) {
+              console.warn("CareLens could not save notification history:", storageError);
+            }
+          } catch (notificationError) {
+            console.error("CareLens could not display a browser notification:", notificationError);
+          }
+        }
+      } catch (checkError) {
+        // Keep the dashboard usable if the follow-up endpoint is temporarily unavailable.
+        console.warn("CareLens could not check overdue follow-ups:", checkError);
+      } finally {
+        checkingRef.current = false;
+      }
+    };
+
+    checkOverdueFollowUps();
+    const intervalId = window.setInterval(checkOverdueFollowUps, 60_000);
+
+    return () => {
+      disposed = true;
+      window.clearInterval(intervalId);
+    };
+  }, [onOverdueCountChange]);
+
+  return null;
+}
+
+
 function App() {
   const [activeView, setActiveView] = useState("quality");
   const [metrics, setMetrics] = useState({});
   const [summary, setSummary] = useState({});
   const [validation, setValidation] = useState({});
   const [gaps, setGaps] = useState([]);
+  const [patientDirectory, setPatientDirectory] = useState([]);
+  const [patientDirectoryLoaded, setPatientDirectoryLoaded] = useState(false);
+  const [patientDirectoryError, setPatientDirectoryError] = useState("");
   const [population, setPopulation] = useState(null);
   const [trends, setTrends] = useState(null);
   const [insights, setInsights] = useState(null);
@@ -1789,12 +1911,65 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [pendingFollowUpCount, setPendingFollowUpCount] = useState(0);
+  const [overdueNotificationCount, setOverdueNotificationCount] = useState(0);
+  const [browserNotificationPermission, setBrowserNotificationPermission] = useState(() =>
+    typeof window !== "undefined" && "Notification" in window
+      ? Notification.permission
+      : "unsupported"
+  );
+
+  const enableBrowserNotifications = useCallback(async () => {
+    if (!("Notification" in window)) {
+      setBrowserNotificationPermission("unsupported");
+      return;
+    }
+
+    try {
+      const permission = await Notification.requestPermission();
+      setBrowserNotificationPermission(permission);
+      if (permission === "granted") {
+        // The monitor checks immediately on its normal polling cycle; trigger a
+        // reload-free confirmation that permission is enabled in the UI.
+        setStatusMessageForNotifications("Desktop notifications enabled.");
+      } else if (permission === "denied") {
+        setStatusMessageForNotifications("Notifications are blocked by your browser. Allow them in site settings.");
+      } else {
+        setStatusMessageForNotifications("Notification permission was not granted.");
+      }
+    } catch (permissionError) {
+      console.error("Could not request notification permission:", permissionError);
+      setStatusMessageForNotifications("Could not enable browser notifications.");
+    }
+  }, []);
+  const [notificationStatusMessage, setNotificationStatusMessage] = useState("");
+  function setStatusMessageForNotifications(message) {
+    setNotificationStatusMessage(message);
+    window.setTimeout(() => setNotificationStatusMessage(""), 5000);
+  }
+
+  const loadPatientDirectory = useCallback(async () => {
+    try {
+      const response = await request("/api/patients?limit=500");
+      const patients = extractPatientList(response);
+      setPatientDirectory(patients);
+      setPatientDirectoryLoaded(true);
+      setPatientDirectoryError("");
+    } catch (loadError) {
+      setPatientDirectory([]);
+      setPatientDirectoryLoaded(false);
+      setPatientDirectoryError(
+        `Patient directory could not load: ${loadError.message || "Request failed"}`
+      );
+    }
+  }, []);
+
   const loadDashboard = useCallback(async () => {
     setLoading(true);
     setError("");
 
     const endpoints = [
       ["/api/metrics", "metrics"],
+      ["/api/patients?limit=500", "patientDirectory"],
       ["/api/data/summary", "summary"],
       ["/api/data/validation", "validation"],
       ["/api/care-gaps", "gaps"],
@@ -1824,7 +1999,13 @@ function App() {
         if (result.status === "rejected") {
           failures.push(`${path}: ${result.reason?.message || "Request failed"}`);
           if (key === "gaps") setGaps([]);
-          else setters[key]?.(null);
+          else if (key === "patientDirectory") {
+            setPatientDirectory([]);
+            setPatientDirectoryLoaded(false);
+            setPatientDirectoryError(
+              `Patient directory could not load: ${result.reason?.message || "Request failed"}`
+            );
+          } else setters[key]?.(null);
           return;
         }
 
@@ -1832,6 +2013,10 @@ function App() {
 
         if (key === "metrics") {
           setMetrics(value?.metrics ?? value ?? {});
+        } else if (key === "patientDirectory") {
+          setPatientDirectory(extractPatientList(value));
+          setPatientDirectoryLoaded(true);
+          setPatientDirectoryError("");
         } else if (key === "gaps") {
           const rawGaps = Array.isArray(value)
             ? value
@@ -1866,6 +2051,7 @@ function App() {
 
   return (
     <div className="app-shell">
+      <OverdueNotificationMonitor onOverdueCountChange={setOverdueNotificationCount} />
       <aside className="sidebar">
         <div className="brand">
           <div className="brand-mark"><HeartPulse size={24} /></div>
@@ -1874,7 +2060,7 @@ function App() {
 
         <div className="sidebar-label">WORKSPACES</div>
 
-        <button className={`nav-item ${activeView === "quality" ? "active" : ""}`} onClick={() => setActiveView("quality")}>
+        <button className={`nav-item ${activeView === "quality" ? "active" : ""}`} onClick={() => { setActiveView("quality"); loadPatientDirectory(); }}>
           <LayoutDashboard size={19} /><span>Quality Intelligence</span>
         </button>
         <button className={`nav-item ${activeView === "attendance" ? "active" : ""}`} onClick={() => setActiveView("attendance")}>
@@ -1917,13 +2103,28 @@ function App() {
           <div className="breadcrumb">CareLens <span>/</span> {viewLabel}</div>
           <div className="topbar-actions">
             <span className="live-label"><span className="status-indicator" />API connected</span>
+            <button
+              type="button"
+              className="icon-button notification-button"
+              onClick={enableBrowserNotifications}
+              aria-label="Enable overdue follow-up notifications"
+              title={browserNotificationPermission === "granted" ? "Desktop notifications enabled" : "Enable overdue follow-up notifications"}
+            >
+              <BellRing size={18} />
+              {overdueNotificationCount > 0 && (
+                <span className="nav-count">{overdueNotificationCount}</span>
+              )}
+            </button>
             <button className="icon-button" onClick={loadDashboard} aria-label="Refresh dashboard" title="Refresh dashboard data">
               <RefreshCw size={18} className={loading ? "spin" : ""} />
             </button>
           </div>
         </header>
 
-        <ErrorBanner message={error} onRetry={loadDashboard} />
+        <ErrorBanner message={error || patientDirectoryError} onRetry={loadDashboard} />
+        {notificationStatusMessage && (
+          <div className="notification-status-message" role="status">{notificationStatusMessage}</div>
+        )}
 
         
 {activeView === "quality" ? (
@@ -1932,6 +2133,8 @@ function App() {
     summary={summary}
     validation={validation}
     gaps={gaps}
+    patientDirectory={patientDirectory}
+    patientDirectoryLoaded={patientDirectoryLoaded}
     loading={loading}
     onRefresh={loadDashboard}
     population={population}
