@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import "./Patient360.css";
 
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "https://care-lens-roan.vercel.app";
 
 const sections = [
   { id: "appointments", label: "Appointments", icon: CalendarDays },
