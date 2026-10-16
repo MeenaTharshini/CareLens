@@ -3,9 +3,16 @@ from pathlib import Path
 import pandas as pd
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi import Query
 from pydantic import BaseModel, Field
-
+from datetime import date, datetime
+from followup_store import (
+    STATUSES,
+    list_followups,
+    get_followup,
+    create_followup,
+    update_followup,
+)
 from review_store import (
     REVIEW_STATUSES,
     get_reviews,
@@ -19,6 +26,11 @@ from engine import (
     validate_relationships,
     calculate_metrics,
     build_care_gap_worklist,
+    build_population_analytics,
+    build_operational_trends,
+    build_analytics_insights,
+    build_attendance_breakdown, 
+    build_attendance_trends,
 )
 
 app = FastAPI(
@@ -386,3 +398,249 @@ def patient_detail(patient_id: str):
         raise
     except (FileNotFoundError, pd.errors.ParserError, ValueError) as error:
         raise HTTPException(status_code=400, detail=str(error))
+
+
+@app.get("/api/analytics/population")
+def population_analytics():
+    try:
+        return build_population_analytics(load_data())
+    except (FileNotFoundError, ValueError) as error:
+        raise HTTPException(status_code=400, detail=str(error))
+
+
+@app.get("/api/analytics/trends")
+def operational_trends(period: str = "month"):
+    if period not in {"month", "year"}:
+        raise HTTPException(
+            status_code=422,
+            detail="period must be 'month' or 'year'.",
+        )
+
+    try:
+        return build_operational_trends(load_data(), period)
+    except (FileNotFoundError, ValueError) as error:
+        raise HTTPException(status_code=400, detail=str(error))
+
+
+@app.get("/api/analytics/insights")
+def analytics_insights():
+    try:
+        return build_analytics_insights(load_data())
+    except (FileNotFoundError, ValueError, KeyError) as error:
+        raise HTTPException(status_code=400, detail=str(error))
+
+
+@app.get("/api/analytics/attendance")
+def attendance_analytics(
+    group_by: str = "age",
+    start_date: str | None = None,
+    end_date: str | None = None,
+    department: str | None = None,
+    age_group: str | None = None,
+    gender: str | None = None,
+):
+    try:
+        return build_attendance_breakdown(
+            load_data(),
+            group_by=group_by,
+            start_date=start_date,
+            end_date=end_date,
+            department=department,
+            age_group=age_group,
+            gender=gender,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
+@app.get("/api/analytics/attendance-trends")
+def attendance_trends(
+    period: str = Query(default="month", pattern="^(month|year)$")
+):
+    data = load_data()
+    return build_attendance_trends(data, period=period)
+
+
+class FollowUpCreate(BaseModel):
+    patient_id: str = Field(min_length=1, max_length=80)
+    title: str = Field(min_length=1, max_length=200)
+    reason: str = Field(min_length=1, max_length=2000)
+    due_date: date
+    priority: str = "Medium"
+    assigned_to: str | None = Field(default=None, max_length=120)
+
+
+class FollowUpUpdate(BaseModel):
+    status: str
+    assigned_to: str | None = Field(default=None, max_length=120)
+    notes: str = Field(default="", max_length=2000)
+
+
+def patient_exists(patient_id: str) -> bool:
+    data = load_data()
+    patients = data.get("patients")
+
+    if patients is None or "id" not in patients.columns:
+        raise HTTPException(
+            status_code=500,
+            detail="Patient data or patient ID column is unavailable.",
+        )
+
+    return bool(_matches_id(patients["id"], patient_id).any())
+
+
+def followup_priority(due_date: str) -> str:
+    due = date.fromisoformat(due_date)
+    days_overdue = (date.today() - due).days
+
+    if days_overdue >= 7:
+        return "High"
+    if days_overdue >= 3:
+        return "Medium"
+    if days_overdue >= 1:
+        return "Low"
+    return "Upcoming" if days_overdue < 0 else "Due Today"
+
+
+def enrich_followup(item: dict) -> dict:
+    result = dict(item)
+    result["days_overdue"] = max(
+        0, (date.today() - date.fromisoformat(result["due_date"])).days
+    )
+    result["alert_level"] = followup_priority(result["due_date"])
+    return result
+
+
+@app.get("/api/follow-ups")
+def get_followups(include_closed: bool = False):
+    return {
+        "follow_ups": [
+            enrich_followup(item)
+            for item in list_followups(include_closed=include_closed)
+        ]
+    }
+
+
+@app.post("/api/follow-ups", status_code=201)
+def add_followup(payload: FollowUpCreate):
+    if payload.priority not in {"High", "Medium", "Low"}:
+        raise HTTPException(
+            status_code=422,
+            detail="Priority must be High, Medium, or Low.",
+        )
+
+    try:
+        if not patient_exists(payload.patient_id):
+            raise HTTPException(status_code=404, detail="Patient not found.")
+
+        item = create_followup(
+            patient_id=payload.patient_id,
+            title=payload.title.strip(),
+            reason=payload.reason.strip(),
+            due_date=payload.due_date.isoformat(),
+            priority=payload.priority,
+            assigned_to=payload.assigned_to.strip()
+            if payload.assigned_to else None,
+        )
+        return {"follow_up": enrich_followup(item)}
+
+    except HTTPException:
+        raise
+    except (ValueError, FileNotFoundError, pd.errors.ParserError) as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
+
+
+def calculate_followup_timing(due_date, status, today=None):
+    """
+    Calculate timing independently from the stored priority.
+    Completed follow-ups are never overdue.
+    """
+    today = today or date.today()
+
+    if status.strip().lower() in {"completed", "closed", "cancelled"}:
+        return {
+            "days_overdue": 0,
+            "timing_label": "Resolved",
+            "is_overdue": False,
+        }
+
+    try:
+        due = date.fromisoformat(str(due_date)[:10])
+    except (TypeError, ValueError):
+        return {
+            "days_overdue": 0,
+            "timing_label": "Date unavailable",
+            "is_overdue": False,
+        }
+
+    days_overdue = max((today - due).days, 0)
+
+    if days_overdue > 0:
+        timing_label = "Overdue"
+    elif due == today:
+        timing_label = "Due Today"
+    else:
+        timing_label = "Upcoming"
+
+    return {
+        "days_overdue": days_overdue,
+        "timing_label": timing_label,
+        "is_overdue": days_overdue > 0,
+    }
+@app.get("/api/follow-ups/{followup_id}")
+def get_followup_details(followup_id: int):
+    item = get_followup(followup_id)
+    if not item:
+        raise HTTPException(status_code=404, detail="Follow-up not found.")
+
+    try:
+        patient = patient_detail(item["patient_id"])
+        return {
+            "follow_up": enrich_followup(item),
+            "patient": patient["patient"],
+            "record_counts": patient["record_counts"],
+        }
+    except HTTPException as exc:
+        if exc.status_code == 404:
+            raise HTTPException(
+                status_code=404,
+                detail="The linked patient record could not be found.",
+            )
+        raise
+
+
+@app.patch("/api/follow-ups/{followup_id}")
+def save_followup(followup_id: int, payload: FollowUpUpdate):
+    if payload.status not in STATUSES:
+        raise HTTPException(
+            status_code=422,
+            detail={
+                "message": "Invalid follow-up status.",
+                "allowed_statuses": sorted(STATUSES),
+            },
+        )
+
+    if not get_followup(followup_id):
+        raise HTTPException(status_code=404, detail="Follow-up not found.")
+
+    item = update_followup(
+        followup_id=followup_id,
+        status=payload.status,
+        assigned_to=payload.assigned_to.strip()
+        if payload.assigned_to else None,
+        notes=payload.notes.strip(),
+    )
+
+    return {"follow_up": enrich_followup(item)}
+
+
+@app.get("/api/patients/{patient_id}/follow-ups")
+def patient_followups(patient_id: str, include_closed: bool = True):
+    if not patient_exists(patient_id):
+        raise HTTPException(status_code=404, detail="Patient not found.")
+
+    items = [
+        enrich_followup(item)
+        for item in list_followups(include_closed=include_closed)
+        if str(item["patient_id"]) == str(patient_id)
+    ]
+
+    return {"follow_ups": items}
